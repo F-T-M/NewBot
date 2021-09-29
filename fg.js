@@ -510,28 +510,21 @@ Fg.on('CB:action,,battery', json => {
 
 
 //-------𝗙𝗨𝗡𝗖𝗜𝗢́𝗡 𝗔𝗡𝗧𝗜 𝗟𝗜𝗡𝗞 𝗪𝗛𝗔𝗧𝗦𝗔𝗣𝗣------
-const linkwa = 'https://chat.whatsapp.com'
-		if (budy.includes(`${linkwa}`)){
-		if (!isGroup) return
-		if (!isAntilink) return
-    if (!isBotGroupAdmins) return reply('🤨 Por suerte no soy  admin, asi que no te expulsare')
-    if (isGroupAdmins) return //reply(`✳️ Los *Admins* son libres 😎`)
-    linkgp = await Fg.groupInviteCode (from)
-    if (budy.includes(`${linkwa}${linkgp}`)) return //reply('✳️ Menos mal que este enlace es de este grupo v:')
+if (isGroup && isAntilink) {
+if (budy.includes("://chat.whatsapp.com/")) {
+if (isGroupAdmins && isOwner) return
+if (!isBotGroupAdmins) return reply('🤨 Por suerte no soy  admin, asi que no te expulsare')
+linkgp = await Fg.groupInviteCode (from)
+    if (budy.includes(`https://chat.whatsapp.com/${linkgp}`)) return //reply('✳️ Menos mal que este enlace es de este grupo v:')
     if (budy.includes(`https://chat.whatsapp.com/Ly4I2LObSvW8VgOnJjofgA`)) return reply('✳️ Menos mal que este enlace es del grupo *📲💻ANDROID WORLD🎬🎮* v:')
-    if (budy.includes(`https://chat.whatsapp.com/G5sXrkhJ0pb0Tu8nhWLaFK`)) return
-		Fg.updatePresence(from, Presence.composing)
-		var Kick = `${sender.split("@")[0]}@s.whatsapp.net`
-		setTimeout( () => {
-		reply('Adios') 
-		}, 1100)
-		setTimeout( () => {
-		Fg.groupRemove(from, [Kick]).catch((e) => {console.log(`*ERROR:* ${e}`)}) 
-					}, 1000)
-		setTimeout( () => {
-		reply(`❎ No permitimos enlaces de otros grupos!\nLo siento *${pushname}* seras expulsado`)
-		}, 0)
-	}
+    if (budy.includes(`${soportefg}`)) return
+console.log(color('[KICK]', 'red'), color('Anti link WhatsApp!', 'yellow'))
+reply(`❎ No permitimos enlaces de otros grupos!\nLo siento *${pushname}* seras expulsado`)
+setTimeout(() => {
+Fg.groupRemove(from, [sender])
+}, 2000);
+}
+}
 	
 	
 //---colores 
@@ -2471,8 +2464,8 @@ if (!isVerify) return reply(userB(prefix))
           if (!isUrl(args[0]) && !args[0].includes("whatsapp.com"))
             return reply(mess.link);
           hen = args[0];
-          if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo  sin el *https://*\n\n📌 Ejemplo *${prefix + command}* chat.whatsapp.com/G5sXrkhJ0pb0Tu8nhWLaFK`);
-          var codeInvite = hen.split("chat.whatsapp.com/")[1];
+          if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo \n\n📌 Ejemplo *${prefix + command}* ${soportefg}`);
+          var codeInvite = hen.split("https://chat.whatsapp.com/")[1];
           if (!codeInvite) return reply("Asegúrese de que el enlace sea correcto");
           var response = await Fg.acceptInvite(codeInvite);
           reply("✅ Me uní correctamente al grupo");
