@@ -606,7 +606,7 @@ break;
 case 'info':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-const fgnum = `${owner}@s.whatsapp.net`
+const fgnum = `59172945992@s.whatsapp.net`
 const crisnum = "529631769130@s.whatsapp.net"
 runtime2 = process.uptime()
 const timestamp2 = speed();
@@ -679,7 +679,7 @@ case 'support':
       reply(dylux) 
    break
    
-//--- verificación  api funciona
+//--- verificación 
 case 'verify':
 case 'reg':
 case 'verificar':
@@ -875,7 +875,7 @@ case 'verdad':
   reply(`‣ *Verdad*\n\n${verdad}`)
 break
 
-//-- Tod reto
+//--reto
 case 'reto':
   if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -1095,7 +1095,7 @@ case 'banlist':
   if (!isVerify) return reply(userB(prefix))
       teks = ` ≡ *BANEADOS*\nLos siguientes números son una lista de números baneados por infringir las reglas o enviar spam al Bot\n\n*Total* : ${ban.length}\n┌───⊷ *LISTA* ⊶\n`
 	    for (let baned of ban) {
-	    teks += `├╼ @${baned.split('@')[0]}\n`
+	    teks += `▢ @${baned.split('@')[0]}\n`
 					}
 	    teks += `└──────────────`
 	    Fg.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": ban}})
@@ -1272,6 +1272,7 @@ linkgp = await Fg.groupInviteCode(from)
 fgxd = `✅ Enlace del grupo anulado
 
 📌 Nuevo enlace : 
+
 https://chat.whatsapp.com/${linkgp}`
 Fg.sendMessage(from, fgxd, text, {quoted: mek})
 break
@@ -1298,7 +1299,7 @@ case 'staff':
 					teks = `▢ *STAFF DEL GRUPO* _${groupMetadata.subject}_\nTotal : ${groupAdmins.length}\n\n┌─────────⊷\n`
 			
 					for (let admin of groupAdmins) {
-						teks += `├╼ @${admin.split('@')[0]}\n`
+						teks += `▢ @${admin.split('@')[0]}\n`
 					}
 					teks += `└────✪ Dylux ┃ ᴮᴼᵀ ✪────`
 					mentions(teks, groupAdmins, true)
@@ -1313,9 +1314,9 @@ if (args.length < 1) return reply(`✳️ Ejemplo: *${prefix + command}* soy feo
 apa = q
 naon = ["Si","No","En efecto"," Tal vez","No lo se","Quizas","2 dias","Jamas", "Un domingo", "no lo hace", "muy falso"]
 random = naon[Math.floor(Math.random() * (naon.length))]
-apakah = `Pregunta : *${apa}*
+preg = `Pregunta : *${apa}*
 Respuesta : ${random}`
-replyfg(apakah)
+replyfg(preg)
 break
 
 //--- pareja al azar 
@@ -1359,19 +1360,6 @@ exif.create(arg.split('|')[0], arg.split('|')[1])
 reply(`✅ Nombre y autor guardado`)
 break
 	        
-case 'stickfg':
-case 'fgstick':
-if (!isOwner)return reply(ownerB())
-if (!isQuotedSticker) return reply(`✳️Responde a un sticker *${prefix + command}*`)
-const encmediia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-const meidia = await Fg.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
-exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
-if (error) return reply('error')
-Fg.sendMessage(from, fs.readFileSync(`./sticker/${sender}.webp`), MessageType.sticker, {quoted: mek})
-fs.unlinkSync(media)
-fs.unlinkSync(`./sticker/takestick_${sender}.exif`)
-})
-break
 
 //-----
 
@@ -1689,15 +1677,7 @@ if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube
 				axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
 				.then((a) => {
 					
-			    if (Number(filesize) >= 30000) return sendMediaURL(from, thumb, `
-*✅ Descarga Completa*
-
-‣ *📌Título* : ${title}
-‣ *📟 Ext* : mp3
-‣ *⚖️Tamaño* : ${filesizeF}
-‣ *🔗 Link* : ${a.data}
-
-_📤 La música se está enviando, si no llega descargue por el link_`)
+			  if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
 				const captions = `
 *✅ Descarga Completa*
 
@@ -1730,15 +1710,7 @@ if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube
 				const { dl_link, thumb, title, filesizeF, filesize } = res
 				axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
 				.then((a) => {
-				if (Number(filesize) >= 90000) return sendMediaURL(from, thumb, `
-*✅ Descarga Completa*
-
-‣ *📌Título* : ${title}
-‣ *📟 Ext* : mp4
-‣ *⚖️Tamaño* : ${filesizeF}
-‣ *🔗 Link* : ${a.data}
-
-_📤 El video se está enviando, si no llega descargue por el link_`)
+				if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
 				const captionsYtmp4 = `
 *✅ Descarga Completa*
 
@@ -2211,17 +2183,7 @@ break
                         const { dl_link, thumb, title, filesizeF, filesize } = res
                         axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
                         .then(async (a) => {
-                        if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `
-*🎶Musica encontrada*
-
-‣ *📌Título* : ${title}
-‣ *📟 Ext* : mp3
-‣ *⚖️Tamaño* : ${filesizeF}
-‣ *🎈Subido* : ${ytfg.videos[0].ago}
-‣ *⏱️Duración* : ${ytfg.videos[0].timestamp}
-‣ *🔗 Link* : ${a.data}
-
-_📤 Enviando, espere si el audio no aparece, descargue por el link_`)
+                        if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
                         const captions = `
 *🎶Musica encontrada*
 
@@ -2261,19 +2223,8 @@ _📤 Enviando, espere si el audio no aparece, descargue por el link_`
                         const { dl_link, thumb, title, filesizeF, filesize } = res
                         axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
                         .then(async (a) => {
-                        if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `
-*🎥 Video econtrado*
-
-‣ *📌Título* : ${title}
-‣ *📟 Ext* : mp4
-‣ *⚖️ Tamaño* : ${filesizeF}
-‣ *🎈 Subido* : ${vidfg.videos[0].ago}
-‣ *⏱️ Duración* : ${vidfg.videos[0].timestamp}
-‣ *🔗 Link* : ${a.data}
-
-_📤 Enviando, espere si el video no aparece, descargue por el link_`)
-                        const captions = `
-*🎥 Video econtrado*
+                        if(Number(filesizeF.split(' MB')[0]) >= 99.00) return reply('❎ El archivo es demasiado grande, la reproducción de video se canceló\nel video debe pesar - 100mb')
+                capt = `≡ *🎥 PLAY VIDEO*
 
 ‣ *📌Título* : ${title}
 ‣ *📟 Ext* : mp4
@@ -2430,9 +2381,6 @@ if (!isQuotedSticker) return reply(`STICKER a IMAGEN\n▁▁▁▁▁▁▁▁�
 					})
 break
 
-      
-      
-
       case 'emoji':
                    case 'semoji':
                    case 'smoji':
@@ -2460,11 +2408,12 @@ case 'join':
 case 'entrabot':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
+  if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo \n\n📌 Ejemplo *${prefix + command}* ${soportefg}`);
  try {
           if (!isUrl(args[0]) && !args[0].includes("whatsapp.com"))
             return reply(mess.link);
           hen = args[0];
-          if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo \n\n📌 Ejemplo *${prefix + command}* ${soportefg}`);
+          
           var codeInvite = hen.split("https://chat.whatsapp.com/")[1];
           if (!codeInvite) return reply("Asegúrese de que el enlace sea correcto");
           var response = await Fg.acceptInvite(codeInvite);
@@ -2527,6 +2476,7 @@ break
 case 'tomp4':
 case 'amp4': 
 case 'tovideo':
+case 'mp4':
 if (!isVerify) return reply(userB(prefix))
                    if (isBanned) return reply(banf())
 if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
