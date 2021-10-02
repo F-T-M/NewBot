@@ -1895,22 +1895,24 @@ break
    case 'img':
    if (!isVerify) return reply(userB(prefix))
         if (isBanned) return reply(banf())
-       if (!q) return reply(`❎ Que imagen quieres que busque?`);
+        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+        if (!q) return reply(`❎ Que imagen quieres que busque?`);
         reply(wait())
-        teks = args.join(" ");
+        try {
+        teks = q
         res = await gis(teks, google);
         function google(error, result) {
-          if (error) {
-            return reply(
-              "_❎ Error, no se encontró la imagen_"
-            );
+          if (error) { return reply("_❎ Error, no se encontró la imagen" );
           } else {
             gugIm = result;
             random = gugIm[Math.floor(Math.random() * gugIm.length)].url;
-            sendMediaURL(from, random);
+            Fg.sendMessage(from,{url:random},image,{quoted: mek, caption: `✅ Aqui tienes : *${q}*`})
           }
         }
-        
+        limitAdd(sender, limit)
+        } catch {
+  	reply(`❎ Intentalo de nuevo mas tarde`)
+  }
         break;
        
         
