@@ -81,7 +81,10 @@ Fg.on('group-participants-update', async (anu) => {
 				}
 				teks = `Hola @${num.split('@')[0]}\nBienvenido/a al Grupo *${mdata.subject}*
 
-▢ *Pide las reglas del grupo* para evitar ser baneado`
+▢ *Pide las reglas del grupo* para evitar ser baneado
+
+▢ *📌 Descripción :* 
+${mdata.desc}`
 				
 				let buff = await getBuffer(ppimg)
 				Fg.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
@@ -94,9 +97,9 @@ Fg.on('group-participants-update', async (anu) => {
 				}
 				teks = `≡ *NUEVO ADMIN*
 ┌──────────────
-├ *Nombre* : @${num.split('@')[0]}
-├ *Número* : ${num.replace('@s.whatsapp.net', '')}
-├ *Mensaje* : Felicidades  Admin 🎉
+▢ *Nombre* : @${num.split('@')[0]}
+▢ *Número* : ${num.replace('@s.whatsapp.net', '')}
+▢ *Mensaje* : Felicidades  Admin 🎉
 └──────────────`
 				let buff = await getBuffer(ppimg)
 				Fg.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
@@ -109,9 +112,9 @@ Fg.on('group-participants-update', async (anu) => {
 				}
 				teks = `≡ *ADMIN DEGRADADO*
 ┌──────────────
-├ *Nombre* : @${num.split('@')[0]}
-├ *Número* : ${num.replace('@s.whatsapp.net', '')}
-├ *Mensaje* : Lo siento :'v
+▢ *Nombre* : @${num.split('@')[0]}
+▢ *Número* : ${num.replace('@s.whatsapp.net', '')}
+▢ *Mensaje* : Lo siento :'v
 └──────────────`
 				let buff = await getBuffer(ppimg)
 				Fg.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
