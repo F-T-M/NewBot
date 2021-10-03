@@ -83,8 +83,8 @@ Fg.on('group-participants-update', async (anu) => {
 
 ▢ *Pide las reglas del grupo* para evitar ser baneado
 
-▢ *📌 Descripción :* 
-${mdata.desc}`
+//▢ *📌 Descripción :* \n${mdata.desc}
+`
 				
 				let buff = await getBuffer(ppimg)
 				Fg.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
