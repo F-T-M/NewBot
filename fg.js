@@ -691,9 +691,8 @@ fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
 try {
 ppimg = await Fg.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
 } catch {
-ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+ppimg = 'https://i.ibb.co/RQj701v/c51bc5f9fe1b.jpg'
 }
-
 			capt = `
 ┌────「 *VERIFICADO* 」─
 ▢ *Nombre:* ${pushname}
@@ -703,8 +702,21 @@ ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gamb
 
 Verificación completa usa *${prefix}Help* para ver el Menu`
 
-daftarimg = await getBuffer(ppimg)
-Fg.sendMessage(from, daftarimg, image, {quoted: mek, caption: capt})
+rgimg = await getBuffer(ppimg)
+try {
+Fg.sendMessage(from, rgimg, image, {quoted: mek, caption: capt})
+
+} catch {
+	regis = `
+┌────「 *VERIFICADO* 」─
+▢ *Nombre:* ${pushname}
+▢ *Hora:* _${hora2}_
+▢ *Usuarios Verificados:* _${_user.length}_
+└────「 *${Fg.user.name}* 」
+
+Verificación completa usa *${prefix}Help* para ver el Menu`
+reply(regis)
+}
 break
 
 //-- Simsimi
@@ -716,7 +728,7 @@ if (!isVerify) return reply(userB(prefix))
                      texto = args.join(' ')
                      anu = await getJson(`https://api.simsimi.net/v1/?text=${texto}&lang=es`)
                      simfg = (`${anu.success}`)      
-                     replyfg(simfg)
+                     reply(simfg)
                      break
                      
 
@@ -1116,10 +1128,7 @@ case 'enlinea':
   			  contextInfo: { mentionedJid: online }
     
 			    })
-
-				break
-
-      
+				break     
 
                   case 'hoy':
                    case 'hora' :
@@ -1170,19 +1179,7 @@ y = q.split('@')[1] + '@s.whatsapp.net'
 Fg.groupRemove(from, [y])
 reply(`✅ Ordenes recibidas, emitidas`)
 break
-
-case 'okick':
- if (!isVerify) return reply(userB(prefix))
-  if (isBanned) return reply(banf())
-if (!isGroup) return reply(group())
-if (!isGroupAdmins) return reply(admin())
-if (!isBotGroupAdmins) return reply(Badmin())
-if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('✳️ Responde al mensaje! del usuario para que lo expulse')
-mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
-mentions(`✅ Ordenes recibidas, emitidas : @${mentioned[0].split('@')[0]}`, mentioned, true)
-Fg.groupRemove(from, mentioned)
-break
-        
+   
       case "add":
         if (!isOwner) return 
 if (!isGroup) return reply(group())
@@ -1842,9 +1839,7 @@ if (args.length < 1) return reply(`✳️ Escriba un Nombre de Usuario\n\n📌Ej
             sendMediaURL(from,ten,teks) 
             })     
               
-            break
-        
-      
+            break     
         
       case 'lyrics':
 case 'letra':
@@ -2128,25 +2123,17 @@ case 'profile':
 					   if (!isVerify) return reply(userB(prefix))
                        if (isBanned) return reply(banf())  
 					Fg.updatePresence(from, Presence.composing)
-
-				
     				try {
-
 					ppimg = await Fg.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
-
 					} catch {
-
 					ppimg = 'https://i.ibb.co/PZNv21q/Profile-FG98.jpg'
 					}
-					 profile = `╭────「 *PERFIL* 」
-│• *🔖 Nombre:* ${pushname}
-│• *🔗 Link:* wa.me/${sender.split("@")[0]}
-╰──────────────────`
-
+					 profile = `┌────「 *PERFIL* 」
+▢ *🔖 Nombre:* ${pushname}
+▢ *🔗 Link:* wa.me/${sender.split("@")[0]}
+└──────────────`
 					buffer = await getBuffer(ppimg)
-
 					Fg.sendMessage(from, buffer, image, {quoted: mek, caption: profile})
-
 					break
   
 //-- Eliminar mensaje del bot
@@ -2582,10 +2569,10 @@ break
       default:
  
                  if (budy.includes(`Gracias bot`)) {
-                  replyfg(`De nada 😊 estoy para ayudarte`)
+                  reply(`De nada 😊 estoy para ayudarte`)
                   }
 				
-//-------------------------------------///---------------------------//----------
+//------------------------------------------------------------------------
         if (isOwner && body.startsWith(">")) {
           try {
             return Fg.sendMessage(
