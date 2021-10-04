@@ -703,20 +703,7 @@ ppimg = 'https://i.ibb.co/RQj701v/c51bc5f9fe1b.jpg'
 Verificación completa usa *${prefix}Help* para ver el Menu`
 
 rgimg = await getBuffer(ppimg)
-try {
 Fg.sendMessage(from, rgimg, image, {quoted: mek, caption: capt})
-
-} catch {
-	regis = `
-┌────「 *VERIFICADO* 」─
-▢ *Nombre:* ${pushname}
-▢ *Hora:* _${hora2}_
-▢ *Usuarios Verificados:* _${_user.length}_
-└────「 *${Fg.user.name}* 」
-
-Verificación completa usa *${prefix}Help* para ver el Menu`
-reply(regis)
-}
 break
 
 //-- Simsimi
