@@ -726,7 +726,7 @@ if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 		 if (args.length < 1) return reply(`Hola _*${pushname}*_ quieres charlar un rato?\n\nResponde con *${prefix + command}* _tu mensaje_`)
                      texto = args.join(' ')
-                     anu = await getJson(`https://api.simsimi.net/v1/?text=${texto}&lang=es`)
+                     anu = await fetchJson(`https://api.simsimi.net/v1/?text=${texto}&lang=es`)
                      simfg = (`${anu.success}`)      
                      reply(simfg)
                      break
