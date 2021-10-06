@@ -689,9 +689,9 @@ case 'daftar':
 					_user.push(sender)
 fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
 try {
-ppimg = await Fg.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
+ppimg = await Fg.getProfilePicture(`${sender.split('@')[0]}@c.us`)
 } catch {
-ppimg = 'https://i.ibb.co/RQj701v/c51bc5f9fe1b.jpg'
+ppimg = 'https://i.ibb.co/PZNv21q/Profile-FG98.jpg'
 }
 			capt = `
 ┌────「 *VERIFICADO* 」─
@@ -705,6 +705,21 @@ Verificación completa usa *${prefix}Help* para ver el Menu`
 rgimg = await getBuffer(ppimg)
 Fg.sendMessage(from, rgimg, image, {quoted: mek, caption: capt})
 break
+
+/*case 'verify':
+			if (isVerify) return reply('*✳️ Tu cuenta ya esta registrada*')
+					_user.push(sender)
+fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
+  capt = `
+┌────「 *VERIFICADO* 」─
+▢ *Nombre:* ${pushname}
+▢ *Hora:* _${hora2}_
+▢ *Usuarios Verificados:* _${_user.length}_
+└────「 *${Fg.user.name}* 」
+
+Verificación completa usa *${prefix}Help* para ver el Menu`
+reply(capt)
+break/*
 
 //-- Simsimi
 case 'simi':
