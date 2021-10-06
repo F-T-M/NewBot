@@ -685,7 +685,7 @@ case 'reg':
 case 'verificar':
 case 'register':
 case 'daftar':
-			if (!isVerify) return reply('*✳️ Tu cuenta ya esta registrada*')
+			//if (isVerify) return reply('*✳️ Tu cuenta ya esta registrada*')
 					_user.push(sender)
 fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
 try {
@@ -719,7 +719,7 @@ fs.writeFileSync('./database/verify.json', JSON.stringify(_user))
 
 Verificación completa usa *${prefix}Help* para ver el Menu`
 reply(capt)
-break/*
+break*/
 
 //-- Simsimi
 case 'simi':
