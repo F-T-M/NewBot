@@ -3,6 +3,7 @@ exports.help = (prefix,pushname) => {
 
 ≡ INFO BOT
 ┌──────────────
+❐ *${prefix}changelog*
 ❐ *${prefix}reglas*
 ❐ *${prefix}creador*
 ❐ *${prefix}info*
@@ -23,10 +24,9 @@ exports.help = (prefix,pushname) => {
 
 ≡ *LISTA DE MENUS*
 ┌───⊷ *STICKER* ⊶
-▢ *${prefix}sticker* _(Foto/video)_ 
+▢ *${prefix}sticker* _(Nombre|Autor)_
 ▢ *${prefix}take* _(Nombre|Autor)_
 ♔ *${prefix}exif* _(Nombre|Autor)_
-♔ *${prefix}stickfg*
 ▢ *${prefix}jumbo*
 ▢ *${prefix}ttp*
 ▢ *${prefix}attp* 
@@ -109,9 +109,11 @@ exports.help = (prefix,pushname) => {
 ☠︎︎ *${prefix}setname*
 ☠︎︎ *${prefix}anularlink*
 ▢ *${prefix}perfil*
+▢ *${prefix}nivel*
 ▢ *${prefix}leido* _(Mensaje bot)_ 
 ☠︎︎ *${prefix}welcome* _(on/off)_
 ☠︎︎ *${prefix}antilinkwha* _(on/off)_
+☠︎︎ *${prefix}leveling* _(on/off)_
 ☠︎︎ *${prefix}delete* _(Mensaje bot)_
 ☠︎︎ *${prefix}salir* _(dejo el grupo)_
 └──────────────
