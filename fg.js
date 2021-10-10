@@ -96,7 +96,7 @@ offline = false;
 
 //-- Help
 const { help } = require('./help/menu')
-const { wait, stick, errorfg, group, banf, ownerB, modsB, premi, userB, admin, Badmin, leveloff, lvlnul, fdiama, fgnsfw, gCoinF, dailyOn, dailyR} = require('./help/respon');
+const { wait, stick, errorfg, group, banf, ownerB, modsB, userB, admin, Badmin, leveloff, lvlnul} = require('./help/respon');
 
 //--------𝗔𝗣𝗜𝗞𝗘𝗬----------
 const Vkey = confi.Zekskey
