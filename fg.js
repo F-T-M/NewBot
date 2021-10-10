@@ -63,9 +63,6 @@ const { fetchJson, getBase64, kyun, createExif } = require('./libreria/fetcher')
 const { yta, ytv, igdl, upload, formatDate } = require("./libreria/ytdl");
 const { webp2mp4File } = require("./libreria/webp2mp4");
 const { cmdadd } = require("./libreria/totalcmd.js");
-const { jadibot, stopjadibot, listjadibot } = require("./libreria/jadibot");
-const _prem = require("./libreria/premium");
-const game = require("./libreria/game");
 const Exif = require('./libreria/exif');
 const exif = new Exif();
 
