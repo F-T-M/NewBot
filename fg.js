@@ -1,10 +1,10 @@
 /*============ FG98 ============
 
     🇩 🇾 🇱 🇺 🇽  𝗩4  template
-
+ 
 ============ FG98 ============*/
 
- //--  Conectar a WhatsApp
+ //--  Conectar a WhatsApp 
 const {
   WAConnection: _WAConnection,
   MessageType,
@@ -21,57 +21,56 @@ const {
   GroupSettingChange,
   waChatKey,
   mentionedJid,
-  processTime,
+  processTime
 } = require("@adiwajshing/baileys");
 
-//-- Modulos
-const simple = require("./libreria/simple.js");
-const hx = require("hxz-api");
+//-- Módulos 
 const yo = require("tod-api");
 const dh = require("dhn-api");
-const qrcode = require("qrcode-terminal");
-const moment = require("moment-timezone");
-const speed = require("performance-now");
-const request = require("request");
-const { spawn, exec, execSync } = require("child_process");
-const fs = require("fs");
-const axios = require("axios");
+const simple = require('./libreria/simple.js')
+const hx = require('hxz-api')
+const translate = require("@vitalets/google-translate-api");
+const qrcode = require("qrcode-terminal")
+const moment = require("moment-timezone")
+const speed = require('performance-now')
+const request = require('request');
+const { spawn, exec, execSync } = require("child_process")
+const fs = require("fs")
+const axios = require("axios")
 const ffmpeg = require("fluent-ffmpeg");
 const imgbb = require('imgbb-uploader');
-const { EmojiAPI } = require("emoji-api");
-const ig = require("insta-fetcher");
-const emoji = new EmojiAPI();
-const fetch = require("node-fetch");
-const FormData = require("form-data");
-const phoneNum = require("awesome-phonenumber");
 const googlefg = require('google-it')
-const gis = require("g-i-s");
-const got = require("got");
-const Exif = require('./libreria/exif');
-const exif = new Exif();
-const imageToBase64 = require("image-to-base64");
-const ID3Writer = require("browser-id3-writer");
-const brainly = require("brainly-scraper");
-const yts = require("yt-search");
-const ms = require("parse-ms");
-const toMs = require("ms");
-const { error } = require("qrcode-terminal");
 const CryptoJS = require("crypto-js");
 const crypto = require('crypto');
+const {removeBackgroundFromImageFile} = require('remove.bg');
 const {convertSticker} = require("./libreria/swm.js")
 const { webp2mp4Url, webp2gifFile, reverseVideoFile } = require('./libreria/ezgif')
+const { validmove, setGame } = require("./libreria/tictactoe");
 const { recognize } = require('./libreria/ocr')
-
-//--New
+const { wikiSearch } = require('./libreria/wiki.js')
 const {  getBuffer, h2k,  generateMessageID, getGroupAdmins,  getRandom, banner,  start,  info, success, close,} = require("./libreria/functions");
-const { color, bgcolor } = require("./libreria/color");
-const { fetchJson, getBase64, kyun, createExif } = require("./libreria/fetcher");
+const { EmojiAPI } = require("emoji-api");
+const ig = require('insta-fetcher')
+const emoji = new EmojiAPI()
+const fetch = require('node-fetch');
+const phoneNum = require('awesome-phonenumber')
+const gis = require('g-i-s');
+const imageToBase64 = require('image-to-base64');
+const yts = require( 'yt-search')
+const ms = require('parse-ms')
+const toMs = require('ms')
+const { error } = require("qrcode-terminal")
+const { color, bgcolor } = require('./libreria/color')
+const { fetchJson, getBase64, kyun, createExif } = require('./libreria/fetcher')
 const { yta, ytv, igdl, upload, formatDate } = require("./libreria/ytdl");
 const { webp2mp4File } = require("./libreria/webp2mp4");
-const time = moment().tz("America/La_Paz").format("HH:mm:ss");
-const { sleep, isAfk, cekafk,  } = require("./libreria/offline");
 const { cmdadd } = require("./libreria/totalcmd.js");
-
+const { jadibot, stopjadibot, listjadibot } = require("./libreria/jadibot");
+const _prem = require("./libreria/premium");
+const game = require("./libreria/game");
+const Exif = require('./libreria/exif');
+const exif = new Exif();
+const { pinterest } = require('./libreria/pinterest')
 
 //-- Reportes
 const _informe = JSON.parse(fs.readFileSync('./result/reportes/informe.json'));
@@ -79,11 +78,15 @@ const _solicitud = JSON.parse(fs.readFileSync('./result/reportes/solicitud.json'
 
 //---Data Base
 const _antilink = JSON.parse(fs.readFileSync('./database/antilink.json'))
+const bancht = JSON.parse(fs.readFileSync('./database/banchat.json'));
 const ban = JSON.parse(fs.readFileSync('./database/banned.json'));
 const confi = JSON.parse(fs.readFileSync('./settings.json'))
 const _welcom = JSON.parse(fs.readFileSync('./database/welcom.json'))
 const _user = JSON.parse(fs.readFileSync('./database/verify.json'))
+const _leveling = JSON.parse(fs.readFileSync('./database/leveling.json'))
+const _level = JSON.parse(fs.readFileSync('./database/nivel.json'))
 const awgp = JSON.parse(fs.readFileSync('./database/awgp.json'))
+
 //-- Resultados
 const _verdad = JSON.parse(fs.readFileSync('./result/verdad.json'));
 const _reto = JSON.parse(fs.readFileSync('./result/reto.json'));
@@ -92,50 +95,120 @@ const _reto = JSON.parse(fs.readFileSync('./result/reto.json'));
 let multi = true
 let nopref = false
 let single = false
-let prefa = '/'
-
+let prefa = '/' 
 //--
 banChats = false;
 offline = false;
 
 //-- Help
 const { help } = require('./help/menu')
-const { wait, stick, errorfg, group, banf, ownerB, modsB, userB, admin, Badmin} = require('./help/respon');
+const { wait, stick, errorfg, group, banf, ownerB, modsB, premi, userB, admin, Badmin, leveloff, lvlnul, fdiama, fgnsfw, gCoinF, dailyOn, dailyR} = require('./help/respon');
 
 //--------𝗔𝗣𝗜𝗞𝗘𝗬----------
 const Vkey = confi.Zekskey
 const lolkey = confi.LolHumanKey
+const hunterkey = confi.fgkey  
 const valkey = 'rivalgans'
 const Xinz = 'XinzBot'
 const Pkode = 'pais' 
 
   //---- 𝗦𝗧𝗔𝗙𝗙 -----
 const owner = confi.ownerN
+const Cowner = confi.CoOwnerN
 const mods = confi.mods
+const ownerName = confi.nombreCreador
 
 //---------𝗥𝗘𝗗𝗘𝗦 𝗦𝗢𝗖𝗜𝗔𝗟𝗘𝗦---------
 const soportefg = 'https://chat.whatsapp.com/G5sXrkhJ0pb0Tu8nhWLaFK' 
 const instafg = 'https://www.instagram.com/fg98._'
-//--anti delete 
-antidel = false
-ngetik = false
-vn = true
-//---
-hit_today = [];
-baterai = {
-    baterai: 0,
-    cas: false
-}
+
+//-----fakethumb-----
+fakefg = fs.readFileSync('./image/fake.jpg')
 
 
 //--Contacto del dueño
 const vcard1 = 'BEGIN:VCARD\n' 
  + 'VERSION:3.0\n' 
- + 'FN:FG98\n'
+ + `FN:${ownerName}\n`
  + 'ORG:Dueño de DyLuxBot;\n' 
  + `TEL;type=CELL;type=VOICE;waid=${owner}:+${owner}\n`
  + 'END:VCARD'
       
+const vcard2 = 'BEGIN:VCARD\n' 
+ + 'VERSION:3.0\n' 
+ + `FN:Co Owner\n`
+ + 'ORG:Co Dueño de DyLux;\n' 
+ + `TEL;type=CELL;type=VOICE;waid=${Cowner}:+${Cowner}\n`
+ + 'END:VCARD'
+ 
+/********** 𝗙𝗨𝗡𝗖𝗜𝗢́𝗡 𝗗𝗘 𝗡𝗜𝗩𝗘𝗟𝗔𝗖𝗜𝗢𝗡 **********/
+const getLevelingXp = (sender) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].id === sender) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		return _level[position].xp
+	}
+}
+
+const getLevelingLevel = (sender) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].id === sender) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		return _level[position].level
+	}
+}
+
+const getLevelingId = (sender) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].id === sender) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		return _level[position].id
+	}
+}
+
+const addLevelingXp = (sender, amount) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].id === sender) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		_level[position].xp += amount
+		fs.writeFileSync('./database/nivel.json', JSON.stringify(_level))
+	}
+}
+
+const addLevelingLevel = (sender, amount) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].id === sender) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		_level[position].level += amount
+		fs.writeFileSync('./database/nivel.json', JSON.stringify(_level))
+	}
+}
+
+const addLevelingId = (sender) => {
+	const obj = { id: sender, xp: 1, level: 1 }
+	_level.push(obj)
+	fs.writeFileSync('./database/nivel.json', JSON.stringify(_level))
+}
 
      //  𝙎𝙀𝙍𝙄𝘼𝙇 𝙂𝙀𝙉𝙀𝙍𝘼𝘿𝙊𝙍 
 const bikinSerial = (size) => {
@@ -187,71 +260,51 @@ myMonths = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","S
 			var year = (yy < 1000) ? yy + 1900 : yy;
 			return `${thisDay}, ${day} - ${myMonths[bulan]} - ${year}`
 }
- 
+
 
 //------------
-const runtime = function (seconds) {
-  seconds = Number(seconds);
-  var d = Math.floor(seconds / (3600 * 24));
-  var h = Math.floor((seconds % (3600 * 24)) / 3600);
-  var m = Math.floor((seconds % 3600) / 60);
-  var s = Math.floor(seconds % 60);
-  var dDisplay = d > 0 ? d + (d == 1 ? " dia, " : " Dia, ") : "";
-  var hDisplay = h > 0 ? h + (h == 1 ? " hora, " : " Hora, ") : "";
-  var mDisplay = m > 0 ? m + (m == 1 ? " minuto, " : " Minuto, ") : "";
-  var sDisplay = s > 0 ? s + (s == 1 ? " segundo" : " segundo") : "";
-  return dDisplay + hDisplay + mDisplay + sDisplay;
-};
 
-module.exports = Fg = async (Fg, mek) => {
-  try {
-    if (!mek.hasNewMessage) return;
-    mek = mek.messages.all()[0];
-    if (!mek.message) return;
-    if (mek.key && mek.key.remoteJid == "status@broadcast") return;
-
-global.prefix
+module.exports = Fg = async (Fg,mek) => {
+try {
+if (!mek.hasNewMessage) return
+mek = mek.messages.all()[0]
+if (!mek.message) return
+if (mek.key && mek.key.remoteJid == 'status@broadcast') return
 global.blocked
-    mek.message =
-      Object.keys(mek.message)[0] === "ephemeralMessage"
-        ? mek.message.ephemeralMessage.message
-        : mek.message;
-    const content = JSON.stringify(mek.message);
-    const from = mek.key.remoteJid;
-    
-   const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
-    
-    const type = Object.keys(mek.message)[0]
-    1;
-    if (mek.key.fromMe) return
-    
-    const cmd = (type === 'conversation' && mek.message.conversation) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text ? mek.message.extendedTextMessage.text : ''.slice(1).trim().split(/ +/).shift().toLowerCase()
-    
+global.prefix
+m = simple.smsg(Fg, mek)
+mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
+const content = JSON.stringify(mek.message)
+const from = mek.key.remoteJid
+const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType    
+const time = moment.tz('America/La_Paz').format('DD/MM HH:mm:ss')
+const hora = moment.tz('America/La_Paz').format('HH:mm')
+const hora2 = moment.tz('America/La_Paz').format('HH:mm:ss')
+
+const type = Object.keys(mek.message)[0]        
+const cmd = (type === 'conversation' && mek.message.conversation) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text ? mek.message.extendedTextMessage.text : ''.slice(1).trim().split(/ +/).shift().toLowerCase()
     //---Multi Prefix
 if(multi){
 var prefix = /^[°•π÷×¶∆£¢€¥®™✓=|~,¿;+×!#$%^&./\\©^]/.test(cmd) ? cmd.match(/^[°•π÷×¶∆£¢€¥®™✓=|~zZ+×!#$,|`÷?;:%abcdefghijklmnopqrstuvwxyz%^&./\\©^]/gi) : '/'
-
 } else {
 if (nopref){
-prefix = ''
-
+prefix = ' '
 } else {
 if(single){
 prefix = prefa }}}
 
-     const body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''  
-    const budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
+//---body
+        const body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''  
+   const budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
     const autofg = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
-    const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
-    hit_today.push(command);
-    const args = body.trim().split(/ +/).slice(1)
-    const isCmd = body.startsWith(prefix)
-    const q = args.join(" ");
-    
-    const botNumber = Fg.user.jid;
+const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
+const args = body.trim().split(/ +/).slice(1)
+const q = args.join(' ')
+const isCmd = body.startsWith(prefix)
+const botNumber = Fg.user.jid;
     const botNumero = botNumber.replace('@s.whatsapp.net', '') //sólo número del bot   
-    const isGroup = from.endsWith("@g.us"); 
-    const sender = mek.key.fromMe 
+const isGroup = from.endsWith('@g.us')
+const sender = mek.key.fromMe 
       ? Fg.user.jid
       : isGroup
       ? mek.participant
@@ -266,85 +319,65 @@ prefix = prefa }}}
     const { wa_version, mcc, mnc, os_version, device_manufacturer, device_model } = Fg.user.phone
     
       const isYo = mek.key.fromMe ? true : false
-      const isOwner = senderNumber == owner || senderNumber == botNumero
+      const isOwner = senderNumber == owner || senderNumber == botNumero || senderNumber == Cowner
       const isMods = mods.includes(senderNumber)
 
     const isVerify = _user.includes(sender)
     const isAntilink = isGroup ? _antilink.includes(from) : false
     const isWelcom = isGroup ? _welcom.includes(from) : false
-   
+   const isBanchat = isGroup ? bancht.includes(from) : false
     
-    const totalchat = await Fg.chats.all();
-    const m = simple.smsg(Fg, mek);
-    const groupMetadata = isGroup ? await Fg.groupMetadata(from) : "";
-    const groupName = isGroup ? groupMetadata.subject : "";
-    const groupId = isGroup ? groupMetadata.jid : "";
-    const groupMembers = isGroup ? groupMetadata.participants : "";
-    const groupDesc = isGroup ? groupMetadata.desc : "";
-    const groupOwner = isGroup ? groupMetadata.owner : "";
-    const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : "";
-    const isBotGroupAdmins = groupAdmins.includes(botNumber) || false;
-    const isGroupAdmins = groupAdmins.includes(sender) || false;
-
+const totalchat = await Fg.chats.all()
+const groupMetadata = isGroup ? await Fg.groupMetadata(from) : ''
+const groupName = isGroup ? groupMetadata.subject : ''
+const groupId = isGroup ? groupMetadata.jid : ''
+const groupMembers = isGroup ? groupMetadata.participants : "";
+const groupDesc = isGroup ? groupMetadata.desc : ''
+const groupOwner = isGroup ? groupMetadata.owner : ''
+const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
+const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+const isGroupAdmins = groupAdmins.includes(sender) || false
+const conts = mek.key.fromMe ? Fg.user.jid : Fg.contacts[sender] || { notify: jid.replace(/@.+/, '') }
+const pushname = mek.key.fromMe ? Fg.user.name : conts.notify || conts.vname || conts.name || '-'
+   //----nuevo
 const isBanned = ban.includes(sender)
-const isAw = isGroup ? awgp.includes(from) : false 
+const isLevelingOn = isGroup ? _leveling.includes(from) : false
+const isAw = isGroup ? awgp.includes(from) : false
 
-    const conts = mek.key.fromMe
-      ? Fg.user.jid
-      : Fg.contacts[sender] || { notify: jid.replace(/@.+/, "") };
-    const pushname = mek.key.fromMe
-      ? Fg.user.name
-      : conts.notify || conts.vname || conts.name || "-";
-    const readmore = "͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏";
-    if (isCmd) cmdadd();
-    const totalhit = JSON.parse(fs.readFileSync("./libreria/totalcmd.json"))[0]
+const totalhit = JSON.parse(fs.readFileSync("./libreria/totalcmd.json"))[0]
       .totalcmd;
 
-   
    chats = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
     const arg = chats.slice(command.length + 2, chats.length)
     const argss = body.split(/ +/g)
-    //Y
-    const time = moment.tz('America/La_Paz').format('DD/MM HH:mm:ss')
-    const hora = moment.tz('America/La_Paz').format('HH:mm')
-    const hora2 = moment.tz('America/La_Paz').format('HH:mm:ss')
-    let d = new Date();
-    let locale = "id";
-    let gmt = new Date(0).getTime() - new Date("1 January 1970").getTime();
-    let weton = ["Pahing", "Libra", "Wage", "Kliwon", "Legi"][
-      Math.floor((d * 1 + gmt) / 84600000) % 5
-    ];
-    let week = d.toLocaleDateString(locale, { weekday: "long" });
-    let date = d.toLocaleDateString(locale, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    let waktu = d.toLocaleDateString(locale, {
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    });
     
-    //----saludos
-    const time2 = moment().tz("America/La_Paz").format("HH:mm:ss");
-    if (time2 < "24:59:00") {
-      var ucapanWaktu = "Buenas noches";
-    }
-    if (time2 < "18:00:00") {
-      var ucapanWaktu = "buenas tardes";
-    }
-    if (time2 < "15:00:00") {
-      var ucapanWaktu = "buenas tardes";
-    }
-    if (time2 < "11:00:00") {
-      var ucapanWaktu = "Buenos dias";
-    }
-    if (time2 < "05:00:00") {
-      var ucapanWaktu = "Buenas noches";
-    }
+//---
+colors = ['red', 'white', 'black', 'blue', 'yellow', 'green']
+const isMedia = (type === 'imageMessage' || type === 'videoMessage')
+const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
+const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
+const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
+const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+const isQuotedPesan = type === 'extendedTextMessage' && content.includes('conversation')
+const isQuotedMessage = type === 'extendedTextMessage'
+const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message')
+const isViewOnce = (type === 'viewOnceMessage')
 
-    //// --- Función de respuesta
+//----𝗥𝗨𝗡𝗧𝗜𝗠𝗘
+const runtime = function (seconds) {
+  seconds = Number(seconds);
+  var d = Math.floor(seconds / (3600 * 24));
+  var h = Math.floor((seconds % (3600 * 24)) / 3600);
+  var m = Math.floor((seconds % 3600) / 60);
+  var s = Math.floor(seconds % 60);
+  var dDisplay = d > 0 ? d + (d == 1 ? " dia, " : " Dia, ") : "";
+  var hDisplay = h > 0 ? h + (h == 1 ? " hora, " : " Hora, ") : "";
+  var mDisplay = m > 0 ? m + (m == 1 ? " minuto, " : " Minuto, ") : "";
+  var sDisplay = s > 0 ? s + (s == 1 ? " segundo" : " segundo") : "";
+  return dDisplay + hDisplay + mDisplay + sDisplay;
+};
+
+  //// --- Función de respuesta
 			mess = {
 				ferr: '❎ Error! \n🔍 Intentalo de nuevo mas tarde',
 				
@@ -366,6 +399,10 @@ const isAw = isGroup ? awgp.includes(from) : false
     const reply = (teks) => {
       Fg.sendMessage(from, teks, text, { quoted: mek });
     };
+ //---respuesta con thumbnail
+const replyfg = (teks) => {
+Fg.sendMessage(from, teks, text, {quoted:mek,thumbnail : fakefg})
+};
     const sendMess = (hehe, teks) => {
       Fg.sendMessage(hehe, teks, text);
     };
@@ -380,7 +417,8 @@ const isAw = isGroup ? awgp.includes(from) : false
             contextInfo: { mentionedJid: memberr },
           });
     };
-    //fake reply
+    
+ //fake reply
       const replyimg = (pesan, tipe, rep1, rep2) => {
         Fg.sendMessage(from, pesan, tipe, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: {
 "imageMessage": {
@@ -389,7 +427,72 @@ const isAw = isGroup ? awgp.includes(from) : false
 "fileLength": "201809",
 "jpegThumbnail": `${rep2}` } } }})
       }
+ 
+ 
 
+  //---------𝗙𝗨𝗡𝗖𝗜𝗢́𝗡 𝗥𝗔𝗡𝗚𝗢𝗦--------
+			const levelRole = getLevelingLevel(sender, _level)
+   	                var role = 'Novato'
+   	                if (levelRole <= 4) {
+   	                        role = 'Bronce III'
+   	                } else if (levelRole <= 6) {
+				role = 'Bronce II'
+			} else if (levelRole <= 8) {
+				role = 'Bronce I'
+			} else if (levelRole <= 10) {
+				role = 'Plata II'
+			} else if (levelRole <= 12) {
+				role = 'Plata I'
+			} else if (levelRole <= 14) {
+				role = 'Oro II'
+			} else if (levelRole <= 16) {
+				role = 'Oro I'
+			} else if (levelRole <= 18) {
+				role = 'Platino II'
+			} else if (levelRole <= 20) {
+				role = 'Platino I'
+			} else if (levelRole <= 22) {
+				role = 'Diamante II'
+			} else if (levelRole <= 24) {
+				role = 'Diamante I'
+			} else if (levelRole <= 26) {
+				role = 'Maestro II'
+				} else if (levelRole <= 28) {
+				role = 'Maestro I'
+			} else if (levelRole <= 30) {
+				role = '♕︎ Gran Maestro'
+			}
+			
+			
+  //---------𝗡𝗜𝗩𝗘𝗟𝗔𝗖𝗜𝗢𝗡-----------
+			if (isGroup && isLevelingOn) {
+				const currentLevel = getLevelingLevel(sender)
+				const checkId = getLevelingId(sender)
+				try {
+					if (currentLevel === undefined && checkId === undefined) addLevelingId(sender)
+					const amountXp = Math.floor(Math.random() * 2000) + 3
+					const requiredXp = 5000 * (Math.pow(2, currentLevel) - 1)
+					const getLevel = getLevelingLevel(sender)
+					addLevelingXp(sender, amountXp)
+					if (requiredXp <= getLevelingXp(sender)) {
+						addLevelingLevel(sender, 1)
+						     //giveLimit(sender, 2, limit)
+						await replyfg(`
+≡  _*Subiste de Nivel*_
+┌──────────────
+▢ *Nombre* : ${pushname}
+▢ *Xp* : ${getLevelingXp(sender)}
+▢ *Nivel* : ${getLevel} ➪ ${getLevelingLevel(sender)}
+▢ *Rango* : *${role}*
+▢ *Diamantes* : *+2💎*
+└──────────────`)
+					}
+				} catch (err) {
+					console.error(err)
+				}
+			}
+			
+			
 			 //----------𝗘𝗠𝗢𝗝𝗜 𝗔 𝗦𝗧𝗜𝗖𝗞𝗘𝗥------------
     const sendStickerFromUrl = async(to, url) => {
 			console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('✅ Descargando sticker...'))
@@ -470,47 +573,10 @@ console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH
 });
 });
 }
-  
-    //----
-    const kick = function (from, orangnya) {
-      for (let i of orangnya) {
-        Fg.groupRemove(from, [i]);
-      }
-    };
-    const add = function (from, orangnya) {
-      Fg.groupAdd(from, orangnya);
-    };
-    const sendBug = async (target, teks) => {
-      if (!teks) teks = ".";
-      await Fg.relayWAMessage(
-        Fg.prepareMessageFromContent(
-          target,
-          Fg.prepareDisappearingMessageSettingContent(0),
-          {}
-        ),
-        { waitForAck: true }
-      );
-      Fg.sendMessage(target, teks, "conversation");
-    };
 
-    //Funcion
-    function clockString(ms) {
-      let h = isNaN(ms) ? "--" : Math.floor(ms / 3600000);
-      let m = isNaN(ms) ? "--" : Math.floor(ms / 60000) % 60;
-      let s = isNaN(ms) ? "--" : Math.floor(ms / 1000) % 60;
-      return [h, m, s].map((v) => v.toString().padStart(2, 0)).join(":");
-    }
-
-Fg.on('CB:action,,battery', json => {
-	const a = json[2][0][1].value
-	const b = json[2][0][1].live
-	baterai.baterai = a
-	baterai.cas = b
-})
-
-
-//-------𝗙𝗨𝗡𝗖𝗜𝗢́𝗡 𝗔𝗡𝗧𝗜 𝗟𝗜𝗡𝗞 𝗪𝗛𝗔𝗧𝗦𝗔𝗣𝗣------
-if (isGroup && isAntilink) {
+    
+    //-------𝗙𝗨𝗡𝗖𝗜𝗢́𝗡 𝗔𝗡𝗧𝗜 𝗟𝗜𝗡𝗞 𝗪𝗛𝗔𝗧𝗦𝗔𝗣𝗣------
+		if (isGroup && isAntilink) {
 if (budy.includes("://chat.whatsapp.com/")) {
 if (isGroupAdmins && isOwner) return
 if (!isBotGroupAdmins) return reply('🤨 Por suerte no soy  admin, asi que no te expulsare')
@@ -527,51 +593,38 @@ Fg.groupRemove(from, [sender])
 }
 	
 	
-//---colores 
-    colors = ["red", "white", "black", "blue", "yellow", "green"];
-   
-   //---Tipo de mensaje
-    const isMedia = type === "imageMessage" || type === "videoMessage";
-    const isQuotedImage =
-      type === "extendedTextMessage" && content.includes("imageMessage");
-    const isQuotedVideo =
-      type === "extendedTextMessage" && content.includes("videoMessage");
-    const isQuotedAudio =
-      type === "extendedTextMessage" && content.includes("audioMessage");
-    const isQuotedSticker =
-      type === "extendedTextMessage" && content.includes("stickerMessage");
-      
- 
+
  if (!isGroup && isCmd) console.log(color('[FG98]','aqua'), "Pv", color(command, "blue"), "de", (sender.split('@')[0]),  args.length)
 if (isGroup && isCmd) console.log(color('[FG98]','aqua'), "Gp", color(command, "green"), "de", (sender.split('@')[0]), "en", (groupName), args.length)
 
 //----------- 𝗩𝗘𝗥 𝗖𝗔𝗥𝗔𝗖𝗧𝗘𝗥𝗜́S𝗧𝗜𝗖𝗔𝗦---------
-
 let public_ = 'Publico'
            if (banChats){
            public_ = 'Privado'
           }
-let antidel_ = 'Inactivo'
-           if (antidel){
-           antidel_ = 'Activo'
-          }
 let Welcome_ = 'Inactivo'
 			if (isWelcom) {
 			Welcome_ = 'Activo'
-			}
-let AntiLink_ = 'Inactivo'
-			if (isAntilink) {
-			AntiLink_ = 'Activo'
+		   } 
+let Leveling_ = 'Inactivo'
+			if (isLevelingOn) {
+			Leveling_ = 'Activo'
 			}
 
-//----
-const sendMessageFromContent = async(jid, message, options) => { 
-		var option = { contextInfo: {}, ...options }
-		send = await Fg.prepareMessageFromContent(jid,message,option)
-		return Fg.relayWAMessage(send) 
-             }
 
-    if (!isOwner && banChats && isCmd === true) return reply('✳️ Bot en modo privado, todas las funciones bloqueadas')
+
+//------------ 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗠𝗔𝗞𝗘𝗥 2 FG98---------
+const sendSticker = (from, filename, mek) => {
+        Fg.sendMessage(from, filename, MessageType.sticker, {quoted: mek})
+}
+
+//------------ 𝗕𝗔𝗡𝗖𝗛𝗔𝗧 ----------
+if (isBanchat){
+if (!isOwner)return //reply(`Grupo Silenciado`) 
+}
+
+//---- 𝗕𝗢𝗧 𝗠𝗢𝗗𝗢 𝗣𝗥𝗜𝗩𝗔𝗗𝗢--
+if (!isOwner && !isMods && banChats && isCmd === true) return //reply('✳️ Bot en modo privado, todas las funciones bloqueadas')
    
    //----𝗔𝗨𝗧𝗢 𝗥𝗘𝗦𝗣𝗨𝗘𝗦𝗧𝗔 
         
@@ -591,8 +644,8 @@ break
 }
 
 //-- 𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦
-    switch (command) {
-      case "menu":
+switch(command) {
+case "menu":
       case "help":  
       if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -602,7 +655,7 @@ break
       replyimg(help(prefix, pushname), text, capt, thum)
 break;
 
-
+//--info bot 
 case 'info':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -675,9 +728,26 @@ break
 case 'soporte':
 case 'support':
  if (!isVerify) return reply(userB(prefix))
-     dylux = `📌 *Grupo soporte del Bot*\n\n${soportefg}`
-      reply(dylux) 
+     dyluxf = `📌 *Grupo soporte del Bot*
+
+${soportefg}`
+      reply(dyluxf) 
    break
+  
+ //----
+ case 'changelog':
+if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+  cbios = `
+  *REGISTRO DE CAMBIOS*
+         ────────────
+  ≡ Nuevos! 
+ ▢  *${prefix}nivel*  para ver tu nivel 
+ ▢  *${prefix}leveling*  para activar la nivelación en el grupo
+`
+
+  reply(cbios)
+break
    
 //--- verificación 
 case 'verify':
@@ -727,13 +797,12 @@ case 'bot':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 		 if (args.length < 1) return reply(`Hola _*${pushname}*_ quieres charlar un rato?\n\nResponde con *${prefix + command}* _tu mensaje_`)
-                     texto = args.join(' ')
-                     anu = await fetchJson(`https://api.simsimi.net/v1/?text=${texto}&lang=es`)
+		texto = args.join(' ')
+                     anu = await fetchJson(`https://api.simsimi.net/v2/?text=${texto}&lc=es`)
                      simfg = (`${anu.success}`)      
-                     reply(simfg)
+                     replyfg(simfg)
                      break
-                     
-
+                   
 //-- Dueño del bot
 case 'owner':
 case 'creator':
@@ -745,6 +814,13 @@ Fg.sendMessage(from, {displayname: "jeff", vcard: vcard1}, MessageType.contact, 
 //Fg.sendMessage(from, {displayname: "jeff", vcard: vcard2}, MessageType.contact, { quoted: mek})
                     .then((res) => Fg.sendMessage(from, `✅ Aqui mi dueño, solo chatea si es necesario`, text, {quoted: res}))
  break
+ case 'codueño':
+ case 'coowner':
+if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+Fg.sendMessage(from, {displayname: "jeff", vcard: vcard2}, MessageType.contact, { quoted: mek})
+                    .then((res) => Fg.sendMessage(from, `✅ Aqui mi segundo dueño :v, solo chatea si es necesario`, text, {quoted: res}))
+ break
 
 case 'status':
 case 'estado':
@@ -752,12 +828,10 @@ if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
  
 stat = `*「 ESTADO DEL BOT 」*
-*🛡️ Modo* : ${public_}
-`
+*🛡️ Modo* : ${public_}`
 reply(stat)
 break
 			
-
 
 //--- Pedidos solicitud
 case 'pedido':
@@ -774,7 +848,6 @@ if (!isVerify) return reply(userB(prefix))
 	break
 
 //--- informes - bugs 
-
 case 'informe':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -879,9 +952,7 @@ if (!isVerify) return reply(userB(prefix))
 					}
 					break
 
-
 //-- Verdad 
-
 case 'verdad':
   if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -908,18 +979,18 @@ case 'wa.me':
 			break
 
 //-- say
-case 'say':
+/*case 'say':
     if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 sendMess(from, q)
-break
+break*/
 
 //-- Escanea el texto de una imagen----- Reconocimiento de texto
 case 'ocr':
 case 'rt':
      if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-			if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 			const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 			const media = await Fg.downloadAndSaveMediaMessage(encmedia)
 			
@@ -929,7 +1000,6 @@ case 'rt':
 								reply(teks.trim())
 								fs.unlinkSync(media)
 							})
-							  
 							.catch(err => {
 								reply(err(prefix))
 								fs.unlinkSync(media)
@@ -996,7 +1066,7 @@ reply(`😔 borre todos mis chats`)
 break
 
 case 'setprefix':
-if (!isOwner)return reply(ownerB())
+if (!isOwner && !isMods)return reply(modsB())
 if (args.length < 1) return reply(`*✳️Formato del comando!*\n\n*📌 Ejemplo :*\n •${prefix + command} multi\n •${prefix + command} nopref\n •${prefix + command} # (Personalizado!)`)
 if((args[0]) == 'multi'){
 if(multi)return reply('_✳️ El Prefijo actual es multi prefijo!_')
@@ -1130,7 +1200,8 @@ case 'enlinea':
   			  contextInfo: { mentionedJid: online }
     
 			    })
-				break     
+
+				break
 
                   case 'hoy':
                    case 'hora' :
@@ -1147,11 +1218,13 @@ Argentina : *${argt}*
     ─────────────`     
   reply(tpf)
                    break          
-
+                  
+           
 //---Acortar enlaces
 				case 'tinyurl':
 				 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
 				if (args.length < 1) return reply(`✳️ Ingrese el link para acortar`)
 try {
 link = args[0]
@@ -1161,7 +1234,9 @@ reply(`${anu.data}`)
 emror = String(e)
 reply(`${e}`)
 }
+limitAdd(sender, limit)
 break
+
 
 case 'tagme':
 if (!isVerify) return reply(userB(prefix))
@@ -1169,7 +1244,7 @@ if (!isVerify) return reply(userB(prefix))
 mentions(`@${sender.split("@")[0]} Hola :)`, [sender], true)
 break
 
-
+    
       case 'kick':
  if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -1181,8 +1256,19 @@ y = q.split('@')[1] + '@s.whatsapp.net'
 Fg.groupRemove(from, [y])
 reply(`✅ Ordenes recibidas, emitidas`)
 break
-   
-      case "add":
+
+case 'okick':
+			 if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+if (!isGroup) return reply(group())
+if (!isGroupAdmins) return reply(admin())
+if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return reply('✳️ Responde a un mensaje!')
+			kick = mek.message.extendedTextMessage.contextInfo.participant
+		    Fg.groupRemove(from, [kick])
+						reply('✅ Ordenes recibidas, emitidas')
+                    break
+
+      /*case "add":
         if (!isOwner) return 
 if (!isGroup) return reply(group())
 if (!isGroupAdmins) return reply(admin())
@@ -1209,10 +1295,9 @@ if (!isBotGroupAdmins) return reply(Badmin())
           entah = mek.message.extendedTextMessage.contextInfo.participant;
           add(from, [entah]);
         }
-        break;
+        break;*/
         
- 
-      //--- abrir y cerrar grupo
+     //--- abrir y cerrar grupo
 case 'grupo':
 					case 'group':
 					 if (!isVerify) return reply(userB(prefix))
@@ -1271,7 +1356,6 @@ linkgp = await Fg.groupInviteCode(from)
 fgxd = `✅ Enlace del grupo anulado
 
 📌 Nuevo enlace : 
-
 https://chat.whatsapp.com/${linkgp}`
 Fg.sendMessage(from, fgxd, text, {quoted: mek})
 break
@@ -1304,7 +1388,8 @@ case 'staff':
 					mentions(teks, groupAdmins, true)
 					break
 
-     //--- preguntas
+
+       //--- preguntas
 
 case 'pregunta':
 if (!isVerify) return reply(userB(prefix))
@@ -1315,7 +1400,7 @@ naon = ["Si","No","En efecto"," Tal vez","No lo se","Quizas","2 dias","Jamas", "
 random = naon[Math.floor(Math.random() * (naon.length))]
 preg = `Pregunta : *${apa}*
 Respuesta : ${random}`
-reply(preg)
+replyfg(preg)
 break
 
 //--- pareja al azar 
@@ -1323,7 +1408,8 @@ case 'shipping':
     if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf()) 
     if (!isGroup) return reply(group())
-   jds = []
+    if (isGame(sender, isOwner, gcount, glimit)) return reply(gCoinF(prefix))
+					jds = []
 					jdii = groupMembers
 					koss = groupMembers
 					akuu = jdii[Math.floor(Math.random() * jdii.length)]
@@ -1338,6 +1424,7 @@ case 'shipping':
 					jds.push(akuu.jid)
 					jds.push(diaa.jid)
 					mentions(teks, jds, true)
+					gameAdd(sender, glimit)
 					break	
 					
 					case 'random':
@@ -1360,8 +1447,6 @@ reply(`✅ Nombre y autor guardado`)
 break
 	        
 
-//-----
-
    case  'trigger': 
        case 'triggered':
 					case 'ger':
@@ -1369,7 +1454,9 @@ break
 					case 'motivada':
 					 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-var imgbb = require('imgbb-uploader')
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+  
+					var imgbb = require('imgbb-uploader')
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 					ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 					reply(wait())
@@ -1387,7 +1474,7 @@ var imgbb = require('imgbb-uploader')
 					console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('📤 Enviando sticker...'))
 					fs.unlinkSync(rano)
 					})
-					
+					limitAdd(sender, limit)
 					} else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1396,7 +1483,8 @@ var imgbb = require('imgbb-uploader')
 		case  'gay2':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+					if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
 gay = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek;
 reply(wait())
 owgig = await Fg.downloadMediaMessage(gay)
@@ -1410,6 +1498,7 @@ var mantap2 = await convertSticker(bas642, `💎 @fg98._`, `🔮 DyLux ┃ ᴮ�
 var imageBuffer2 = new Buffer.from(mantap2, 'base64');
 Fg.sendMessage(from, imageBuffer2, sticker, {quoted: mek})
 fs.unlinkSync('./stickgay.jpeg')
+limitAdd(sender, limit)
 } else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1419,7 +1508,8 @@ fs.unlinkSync('./stickgay.jpeg')
 					case 'sf':
 					if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+            if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
 rip = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek;
 reply(wait())
 owgir = await Fg.downloadMediaMessage(rip)
@@ -1433,6 +1523,7 @@ var mantap2r = await convertSticker(bas642r, `💎 @fg98._`, `🔮 DyLux ┃ ᴮ
 var imageBuffer2r = new Buffer.from(mantap2r, 'base64');
 Fg.sendMessage(from, imageBuffer2r, sticker, {quoted: mek})
 fs.unlinkSync('./stickrip.jpeg')
+limitAdd(sender, limit)
 } else {
 reply('✳️ *Envia una imagen con el comando o etiqueta una imagen que se haya enviado*')
 }
@@ -1442,7 +1533,8 @@ break
 		case  'aprobado':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-var imgbb = require('imgbb-uploader')
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+					var imgbb = require('imgbb-uploader')
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 					ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 					reply(wait())
@@ -1460,7 +1552,7 @@ var imgbb = require('imgbb-uploader')
 					console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('📤 Enviando sticker...'))
 					fs.unlinkSync(rano)
 					})
-					
+					limitAdd(sender, limit)
 					} else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1473,7 +1565,8 @@ var imgbb = require('imgbb-uploader')
 		case 'scarcel':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+					if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
 rej = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek;
 reply(wait())
 owgir = await Fg.downloadMediaMessage(rej)
@@ -1487,6 +1580,7 @@ var mantap2c = await convertSticker(bas642c, `💎 @fg98._`, `🔮 DyLux ┃ ᴮ
 var imageBuffer2c = new Buffer.from(mantap2c, 'base64');
 Fg.sendMessage(from, imageBuffer2c, sticker, {quoted: mek})
 fs.unlinkSync('./stickc.jpeg')
+limitAdd(sender, limit)
 } else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1497,7 +1591,8 @@ fs.unlinkSync('./stickc.jpeg')
 		case  'desperdiciada':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-var imgbb = require('imgbb-uploader')
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
+					var imgbb = require('imgbb-uploader')
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 					ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 					reply(wait())
@@ -1515,7 +1610,7 @@ var imgbb = require('imgbb-uploader')
 					console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('📤 Enviando sticker...'))
 					fs.unlinkSync(rano)
 					})
-					
+					limitAdd(sender, limit)
 					} else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1524,6 +1619,7 @@ var imgbb = require('imgbb-uploader')
 case 'smeme':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
 if (!isQuotedSticker) return reply(`✳️Responde a un sticker con el comando\n📌Ejemplo ${prefix + command} text|text2`)
 smeme = q
 var tex1 = smeme.split('|')[0]
@@ -1540,11 +1636,13 @@ teks = `${anu.display_url}`
 sendStickerUrl(from, `https://pecundang.herokuapp.com/api/memegen2?teks1=${tex1}&teks2=${tex2}&img_url=${teks}`, mek)
 fs.unlinkSync('./stickmeme.jpeg')
 }
+limitAdd(sender, limit)
 break
 case 'stickmeme2':		
 case 'smeme2':	
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())						
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
 if(!q) return reply(`✳️Responde a un sticker con el comando\n📌Ejemplo ${prefix + command} jsjs`)
 if (mek.message.extendedTextMessage != undefined || mek.message.extendedTextMessage != null) {
 ger = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1557,9 +1655,11 @@ teks = `${anu.display_url}`
 sendStickerUrl(from, `https://pecundang.herokuapp.com/api/memegen3?teks=${q}&img_url=${teks}`, mek)
 fs.unlinkSync('./stickmeme.jpeg')
 }
+limitAdd(sender, limit)
 break
         
-      
+
+
 
 //-- mencionar a todos los miembros
 case 'mentionall': 
@@ -1625,7 +1725,7 @@ await Fg.sendMessage(from, options, text)
 break
 ;
 
-//-------(𝗗𝗘𝗦𝗖𝗔𝗥𝗚A𝗦 -  𝗜𝗡𝗦𝗧𝗔 - 𝗧𝗜𝗞𝗧𝗢𝗞------
+//-------(𝗗𝗘𝗦𝗖𝗔𝗥𝗚A𝗦 -  𝗦𝗧𝗔𝗟𝗞𝗦) 𝗜𝗡𝗦𝗧𝗔 - 𝗧𝗜𝗞𝗧𝗢𝗞------
       case 'tiktok':
       if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
@@ -1644,12 +1744,12 @@ if (args.length < 1) return reply(`✳️ Ingrese el link de un video`)
 		})
 		
      		.catch(e => console.log(e))
+     break
      
-     		break
      case 'tiktokaudio':
  if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.link)
+ if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.link)
  		if (args.length < 1) return reply(`✳️ Ingrese el link de un video`)
  		reply(wait())
  		hx.ttdownloader(`${args[0]}`)
@@ -1659,15 +1759,15 @@ if (!isUrl(args[0]) && !args[0].includes('tiktok.com')) return reply(mess.link)
             sendMediaURL(from,audiotk,'')
     		})
      		.catch(e => console.log(e))
-     
-     		break
-        
+     	break
+    
+ 
       case 'ytmp3':
 			  if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube\n\n📌 Ejemplo: *${prefix + command}* https://www.youtube.com/watch?v=_aelrhBsIRE`)
 			let isLinks = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-			if (!isLinks) return reply(err(prefix))
+			if (!isLinks) return reply(errorfg(prefix))
 				try {
 				reply(wait()) 
 				yta(args[0])
@@ -1676,7 +1776,7 @@ if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube
 				axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
 				.then((a) => {
 					
-			  if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
+			    if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
 				const captions = `
 *✅ Descarga Completa*
 
@@ -1688,7 +1788,6 @@ if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube
 _📤 La música se está enviando, si no llega descargue por el link_`
 				sendMediaURL(from, thumb, captions)
 				sendMediaURL(from, dl_link).catch(() => reply(mess.error.api))
-				
 				})
 				})
 				} catch (err) {
@@ -1700,7 +1799,7 @@ _📤 La música se está enviando, si no llega descargue por el link_`
   if (isBanned) return reply(banf())
 if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube\n\n📌 Ejemplo: *${prefix + command}* https://www.youtube.com/watch?v=_aelrhBsIRE`)
 			let isLinks2 = args[0].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-			if (!isLinks2) return reply(err(prefix))
+			if (!isLinks2) return reply(errorfg(prefix))
 				try {
 				reply(wait()) 
 				ytv(args[0])
@@ -1721,13 +1820,84 @@ if (args.length < 1) return reply(`✳️ Use en comando más el link de YouTube
 _📤 El video se está enviando, si no llega descargue por el link_`
 				sendMediaURL(from, thumb, captionsYtmp4)
 				sendMediaURL(from, dl_link).catch(() => reply(mess.error.api))
-				
 				})		
 				})
 				} catch (err) {
 			    reply(mess.error.api)
 				}
 				break
+		
+ case 'play':
+			if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+    if (args.length < 1) return reply(`✳️ *Ingresa el título de una canción*\n\n📌Ejemplo *${prefix + command}* Lil Peep broken smile`)
+  reply(wait())
+            var srch = args.join('')
+    		ytfg = await yts(srch);
+    		aramat = ytfg.all 
+   			var mulaikah = aramat[0].url							
+                  try {
+                  	
+                    yta(mulaikah)
+                    .then((res) => {
+                        const { dl_link, thumb, title, filesizeF, filesize } = res
+                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                        .then(async (a) => {
+                        if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
+                        const captions = `
+*🎶Musica encontrada*
+
+‣ *📌Título* : ${title}
+‣ *📟 Ext* : mp3
+‣ *⚖️Tamaño* : ${filesizeF}
+‣ *🎈Subido* : ${ytfg.videos[0].ago}
+‣ *⏱️Duración* : ${ytfg.videos[0].timestamp}
+‣ *🔗 Link* : ${a.data}
+
+_📤 Enviando, espere si el audio no aparece, descargue por el link_`
+                        sendMediaURL(from, thumb, captions)
+                        await sendMediaURL(from, dl_link).catch(() => reply('error'))
+                             })                
+                        })
+                        } catch (err) {
+                        reply(mess.error.api) }
+                   break
+   
+      case 'video':
+				case 'playvideo':
+				case 'playvid':
+				case 'playmp4':
+				if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+if (args.length < 1) return reply(`✳️ *Ingresa el título de un video*\n\n📌Ejemplo *${prefix + command}* Lil Peep broken smile`)
+           reply(wait())
+        var srch = args.join("");
+        vidfg = await yts(srch);
+        aramat = vidfg.all;
+        var mulaikah = aramat[0].url;
+        try {
+          ytv(mulaikah).then((res) => {
+            const { dl_link, thumb, title, filesizeF, filesize } = res;
+            axios
+              .get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+              .then(async (a) => {
+                if(Number(filesizeF.split(' MB')[0]) >= 99.00) return reply('❎ El archivo es demasiado grande, la reproducción de video se canceló\nel video debe pesar - 100mb')
+                capt = `≡ *🎥 PLAY VIDEO*
+
+‣ *📌Título* : ${title}
+‣ *📟 Ext* : mp4
+‣ *⚖️ Tamaño* : ${filesizeF}
+
+_📤 Enviando, espere si el video no aparece, descargue por el link_`
+                
+                sendMediaURL(from, thumb, capt);
+                await sendMediaURL(from, dl_link).catch(() => reply("error"));
+              });
+          });
+        } catch (err) {
+          reply(mess.error.api);
+        }
+         break;
 				
 
       case 'igfoto':       
@@ -1736,7 +1906,7 @@ _📤 El video se está enviando, si no llega descargue por el link_`
                     case 'instagram':
          if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (!isUrl(args[0]) && !args[0].includes("instagram.com")) return reply(mess.link);
+    if (!isUrl(args[0]) && !args[0].includes("instagram.com")) return reply(mess.link);
        if (args.length < 1) return reply(`✳️ Ingrese un link de una foto o video de Instagram`)
         reply(wait());
         hx.igdl(args[0]).then(async (result) => {
@@ -1756,7 +1926,7 @@ if (!isUrl(args[0]) && !args[0].includes("instagram.com")) return reply(mess.lin
             }
           }
         });
-        break;
+             break;
       //******************** 》 SEARCH 《 ********************\\
 case 'ytsearch':
 if (!isVerify) return reply(userB(prefix))
@@ -1782,14 +1952,13 @@ if (args.length < 1) return reply(`✳️ Ejemplo : ${prefix + command} Lil Peep
 		    		});
 		    		ytresult += '─── DyLux ┃ ᴮᴼᵀ ───'
 		    		
-		            Fg.sendMessage(from, tbuff, image, {quoted: mek, caption: ytresult})
-		            
-					break
+		            Fg.sendMessage(from, tbuff, image, {thumbnail:fs.readFileSync(`./image/fake.jpg`), quoted: mek, caption: ytresult})
+		            break
 					
 					case 'ytstalk':
 					if (!isVerify) return reply(userB(prefix))
                      if (isBanned) return reply(banf())
-                  if (args.length < 1) return reply(`✳️ Ingrese un nombre del canal \n\n📌 Ejemplo : *${prefix + command}* Lil Peep`)  
+                     if (args.length < 1) return reply(`✳️ Ingrese un nombre del canal \n\n📌 Ejemplo : *${prefix + command}* Lil Peep`)  
                      reply(wait())
 					ytk = q
 					anu = await fetchJson(`http://api.lolhuman.xyz/api/ytchannel?apikey=${lolkey}&query=${ytk}`, {method: 'get'})
@@ -1798,11 +1967,8 @@ if (args.length < 1) return reply(`✳️ Ejemplo : ${prefix + command} Lil Peep
 					cari += `*Canal* : ${search.channel_name}\n*Acerca de* : ${search.channel_about}\n*Creado* : ${search.channel_created}\n*Link* : https://youtu.com/channel/${search.channel_id}\n•••••••••••••••••\n`
 					}
 					reply(cari.trim())
-					
 					break
 				
-//==========================================================//
-      
 
 				//-- link del grupo
 case 'linkgroup': 
@@ -1821,7 +1987,7 @@ case 'igstalk':
 case 'stalking':
    if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (args.length < 1) return reply(`✳️ Escriba un Nombre de Usuario\n\n📌Ejemplo : *${prefix + command}* fg98._`)
+    if (args.length < 1) return reply(`✳️ Escriba un Nombre de Usuario\n\n📌Ejemplo : *${prefix + command}* fg98._`)
                    reply(wait()) 
            ig.fetchUser(`${args.join(' ')}`).then(Y => {
    //         console.log(`${args.join(' ')}`)
@@ -1840,8 +2006,7 @@ if (args.length < 1) return reply(`✳️ Escriba un Nombre de Usuario\n\n📌Ej
 └──────────────`
             sendMediaURL(from,ten,teks) 
             })     
-              
-            break     
+                break
         
       case 'lyrics':
 case 'letra':
@@ -1874,44 +2039,46 @@ copid = `❒ *「 Covid ${q} 」* ❒
 ‣ *Muertos de hoy :* _${cvd.result.today_deaths}_
 ‣ *Total tratados :* _${cvd.result.total_active}_`
 reply(copid)
+limitAdd(sender, limit)
 break
 
       case "pinterest":
-        if (!isVerify) return reply(userB(prefix))
-        if (isBanned) return reply(banf())
-   if (!q) return reply(`❎ Que imagen quieres que busque?`);
-        reply(wait())
-        let pin = await hx.pinterest(q);
-        let ac = pin[Math.floor(Math.random() * pin.length)];
-        let di = await getBuffer(ac);
-        await Fg.sendMessage(from, di, image, { quoted: mek, caption: `✅ Pinterest : *${q}*` });
-        
-        break;
-       case 'image':
+      case 'image':
    case 'imagen':
    case 'img':
-   if (!isVerify) return reply(userB(prefix))
+        if (!isVerify) return reply(userB(prefix))
         if (isBanned) return reply(banf())
         if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
         if (!q) return reply(`❎ Que imagen quieres que busque?`);
         reply(wait())
-        try {
-        teks = q
-        res = await gis(teks, google);
-        function google(error, result) {
-          if (error) { return reply("_❎ Error, no se encontró la imagen" );
-          } else {
-            gugIm = result;
-            random = gugIm[Math.floor(Math.random() * gugIm.length)].url;
-            Fg.sendMessage(from,{url:random},image,{quoted: mek, caption: `✅ Aqui tienes : *${q}*`})
-          }
-        }
+        let pin = await hx.pinterest(q);
+        let ac = pin[Math.floor(Math.random() * pin.length)];
+        let di = await getBuffer(ac);
+        await Fg.sendMessage(from, di, image, { quoted: mek, caption: `✅ Aqui tienes : *${q}*` });
         limitAdd(sender, limit)
-        } catch {
-  	reply(`❎ Intentalo de nuevo mas tarde`)
-  }
         break;
        
+       
+        
+       /*case 'image':
+   case 'imagen':
+   case 'img':
+   if (!isVerify) return reply(userB(prefix))
+        if (isBanned) return reply(banf())
+       if (!q) return reply(`❎ Que imagen quieres que busque?`);
+        reply(wait())
+             gimg = q
+            try {
+            gis(gimg, async (error, result) => {
+            n = result
+            images = n[Math.floor(Math.random() * n.length)].url
+            Fg.sendMessage(from,{url:images},image,{quoted: mek, caption: `✅ Aqui tienes : *${q}*`})
+            });
+            } catch {
+  	reply(mess.ferr)
+  }
+   break*/
+
         
         //--image
 case 'rip':
@@ -1932,6 +2099,7 @@ reply('✳️ *Envia una imagen con el comando o etiqueta una imagen que se haya
 break
 
 
+  
                    //--fake reply
 case 'fitnah':
 case 'fake':
@@ -1954,25 +2122,9 @@ if (args.length < 1) return reply(`✳️ *Uso del comamdo* :\n${prefix}fake @ta
             message: { conversation: `${target}` },
           },
         });
-        break;
+   break;
      
-      case 'take':
-         case 'takestick':
-         case 'robar':
-if (!isVerify) return reply(userB(prefix))
-  if (isBanned) return reply(banf())
- if (!isQuotedSticker) return reply(`✳️ Responde a un sticker\n\n*USO DEL COMAMDO*\n*${prefix + command}* Nombre|Autor\n\n📌Ejemplo *${prefix + command}* Memes|FG98`);
-        encmedia = JSON.parse(JSON.stringify(mek).replace("quotedM", "m"))
-          .message.extendedTextMessage.contextInfo;
-        media = await Fg.downloadAndSaveMediaMessage(encmedia);
-        anu = args.join(" ").split("|");
-        satu = anu[0] !== "" ? anu[0] : `DyLux`;
-        dua = typeof anu[1] !== "undefined" ? anu[1] : `@fg98._`;
-        require("./libreria/fetcher.js").createExif(satu, dua);
-        require("./libreria/fetcher.js").modStick(media, Fg, mek, from);
-        break;
-        
-
+ 
       case 'public':
 case 'publico':
       if (!isOwner)return reply(ownerB()) 
@@ -1980,9 +2132,10 @@ case 'publico':
         banChats = false;
         reply(`*🌍 Bot Modo* : Publico`);
         break
-    case 'self':
+   
 case 'privado':
 case 'private':
+case 'self':
 if (!isOwner)return reply(ownerB()) 
         if (banChats === true) return;
         banChats = true;
@@ -1994,7 +2147,7 @@ if (!isOwner)return reply(ownerB())
 try{
  if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (!isGroup) return reply(group())
+ if (!isGroup) return reply(group())
              
 d = []
 teks = '≡ 🏳️‍🌈 *TOP 10 GAYS*\n Está es una lista de los más gays del grupo\n┌──────────────\n' 
@@ -2005,7 +2158,7 @@ d.push(groupMembers[r].jid)
 }
 teks += `└──────────────`
 mentions(teks, d, true)
- 
+
 } catch (e) {
 console.log(e)
 reply('❎ Ocurrió un error inesperado intente de nuevo')
@@ -2013,6 +2166,96 @@ reply('❎ Ocurrió un error inesperado intente de nuevo')
 }
 break
 	
+				// Nivel
+
+case 'level':
+case 'nivel':
+case 'lvl':
+
+if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+    if (!isGroup) return reply(group()) 
+                if (!isLevelingOn) return reply(leveloff())
+             
+                const userLevel = getLevelingLevel(sender)
+                const userXp = getLevelingXp(sender)
+                if (userLevel === undefined && userXp === undefined) return reply(lvlnul())
+                const requiredXp = 5000 * (Math.pow(2, userLevel) - 1)
+                sem = sender.replace('@s.whatsapp.net','')
+                resul = `┏━━━━━━♡ *NIVEL* ♡━━━━━━━┓
+┃╭───────────────────
+┃│➸ *Nombre* : ${pushname}
+┃│➸ *XP* : ${userXp} / ${requiredXp}
+┃│➸ *NIVEL* : ${userLevel}
+┃│➸ *Rango* : ${role}
+┃╰───────────────────
+┗━━━━━━━━━━━━━━━━━━━━┛`
+               Fg.sendMessage(from, resul, text, { quoted: mek})
+                .catch(async (err) => {
+                        console.error(err)
+                        await reply(`❎ Ocurrió un Error!\n${err}`)
+                    })
+            break
+        
+				case 'ranks':
+            case 'rangos':
+            if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+    if (!isGroup) return reply(group())
+            const usernivel = getLevelingLevel(sender)
+            
+           fgranks = `▢ *${pushname}* Nivel : *${usernivel}* Rango : *${role}*
+
+           ❑ *RANGOS*
+┌────────────────
+   *Niveles* ─╬─ *Rangos*
+├────────────────
+▷  _1_ = *Novato*
+▷  _4_ = *Bronce III*
+▷  _6_ = *Bronce II*
+▷  _8_ = *Bronce I*
+▷  _10_ = *Plata II*
+▷  _12_ = *Plata I*
+▷  _14_ = *Oro II*
+▷  _16_ = *Oro I*
+▷  _18_ = *Platino II*
+▷  _20_ = *Platino I*
+▷  _22_ = *Diamante II*
+▷  _24_ = *Diamante I*
+▷  _26_ = *Maestro II*
+▷  _28_ = *Maestro I*
+▷  _30_ = *♕︎ Gran Maestro*
+└─────────────────
+*NOTA* : _Alcanzas un rango al subir de nivel_`
+           reply(fgranks)
+           break
+				
+			
+  
+//Leveling 
+
+    case 'leveling':
+case 'nivelación':
+    if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+                if (!isGroup) return reply(group()) 
+               if (!isGroupAdmins && !isOwner) return reply(admin())
+                if (args.length < 1) return reply(`✳️ *NIVELACION*\n\n*${prefix + command} on* para activar\n*${prefix + command} off* para desactivar`)
+                if (args[0] === 'on') {
+                    if (isLevelingOn) return reply('✳️ *Ya está activado*')
+                    _leveling.push(from)
+                    fs.writeFileSync('./database/leveling.json', JSON.stringify(_leveling))
+                   reply('✅ Nivelacion habilitada en el grupo')
+                } else if (args[0] === 'off') {
+                    _leveling.splice(from, 1)
+                    fs.writeFileSync('./database/leveling.json', JSON.stringify(_leveling))
+                     reply('✅ Nivelacion deshabilita')
+                } else {
+                    reply(`✳️ *NIVELACION*\n\n*${prefix + command} on* para activar\n*${prefix + command} off* para desactivar`)
+                }
+                
+            break
+                  
 //--- Bienvenida on/off
 case 'welcome':
 case 'bv':
@@ -2037,6 +2280,7 @@ case 'bienvenida':
 						reply(`✳️ *BIENVENIDAS*\n\n*${prefix + command} on* para activar\n*${prefix + command} off* para desactivar`)
 					}
 		break
+
 
 //--- on/off antilink WhatsApp 
 				case 'antilink':
@@ -2063,7 +2307,39 @@ case 'bienvenida':
 					}
 					break
 					
-					
+case 'banchat':
+if (!isGroup) return reply(group())
+if (!isOwner && !isMods) return reply(modsB())
+//if (!isBotGroupAdmins) return reply(Badmin())
+if (isBanchat) return reply(`✳️ Este grupo ya está silenciado`)
+bancht.push(from)
+fs.writeFileSync('./database/banchat.json', JSON.stringify(bancht))
+reply(`✅ *Grupo Silenciado*\n\n⏯️ El bot ha sido silenciado en este chat. No responderá ningún comando`)
+break
+
+case 'unbanchat':
+if (!isOwner && !isMods) return reply(modsB())
+if (!isBanchat) return reply(`✳️El grupo no estaba silenciado`)
+let ubc = bancht.indexOf(from)
+bancht.splice(ubc, 1)
+fs.writeFileSync('./database/banchat.json', JSON.stringify(bancht))
+reply(`✅ *Grupo desmuteado*\n\n ▶️ Ahora ya pueden usar los comandos`)
+break
+
+case 'listbanchat': 
+case 'listbc':
+if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf())
+ teks = `▢ *Grupos silenciados!*\n▢ _Total : ${bancht.length}_\n\n`
+for(let i of bancht){
+met = await Fg.groupMetadata(i)
+teks += '🛡️ Id : ' + i + '\n'
+teks += '📌 Nombre : ' + met.subject + '\n\n'
+}
+reply(teks)
+break
+
+
 //-- Dar admin 
 case 'promote':
 case 'promover':
@@ -2089,10 +2365,6 @@ case 'rol':
 					}
 					break
 					
-					
-
-
-
 //-- Bajar posiciones - quitar admin
 case 'demote':
 case 'degradar':
@@ -2156,86 +2428,10 @@ reply(e)
 console.log(e)
 }
 break
-//----
+
       
- case 'play':
-			if (!isVerify) return reply(userB(prefix))
-  if (isBanned) return reply(banf())
-   if (args.length < 1) return reply(`✳️ *Ingresa el título de una canción*\n\n📌Ejemplo *${prefix + command}* Lil Peep broken smile`)
-  reply(wait())
-            var srch = args.join('')
-    		ytfg = await yts(srch);
-    		aramat = ytfg.all 
-   			var mulaikah = aramat[0].url							
-                  try {
-                  	
-                    yta(mulaikah)
-                    .then((res) => {
-                        const { dl_link, thumb, title, filesizeF, filesize } = res
-                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-                        .then(async (a) => {
-                        if (Number(filesize) >= 100000) return reply('✳️ El archivo pesa más de 100 MB! no puedo enviar')
-                        const captions = `
-*🎶Musica encontrada*
-
-‣ *📌Título* : ${title}
-‣ *📟 Ext* : mp3
-‣ *⚖️Tamaño* : ${filesizeF}
-‣ *🎈Subido* : ${ytfg.videos[0].ago}
-‣ *⏱️Duración* : ${ytfg.videos[0].timestamp}
-‣ *🔗 Link* : ${a.data}
-
-_📤 Enviando, espere si el audio no aparece, descargue por el link_`
-                        sendMediaURL(from, thumb, captions)
-                        await sendMediaURL(from, dl_link).catch(() => reply('error'))
-                        
-                        })                
-                        })
-                        } catch (err) {
-                        reply(mess.error.api) }
-                   break
-                   
-                   case 'video':
-				case 'playvideo':
-				case 'playvid':
-				case 'playmp4':
-				 if (!isVerify) return reply(userB(prefix))
-  if (isBanned) return reply(banf())
-           if (args.length < 1) return reply(`✳️ *Ingresa el título de un video*\n\n📌Ejemplo *${prefix + command}* Lil Peep broken smile`)
-            var srch = args.join('')
-            vidfg = await yts(srch);
-            aramat = vidfg.all 
-            var mulaikah = aramat[0].url                            
-                  try {
-                  	reply(wait()) 
-                    ytv(mulaikah)
-                    .then((res) => {
-                    
-                        const { dl_link, thumb, title, filesizeF, filesize } = res
-                        axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-                        .then(async (a) => {
-                        if(Number(filesizeF.split(' MB')[0]) >= 99.00) return reply('❎ El archivo es demasiado grande, la reproducción de video se canceló\nel video debe pesar - 100mb')
-                capt = `≡ *🎥 PLAY VIDEO*
-
-‣ *📌Título* : ${title}
-‣ *📟 Ext* : mp4
-‣ *⚖️ Tamaño* : ${filesizeF}
-‣ *🎈 Subido* : ${vidfg.videos[0].ago}
-‣ *⏱️ Duración* : ${vidfg.videos[0].timestamp}
-‣ *🔗 Link* : ${a.data}
-
-_📤 Enviando, espere si el video no aparece, descargue por el link_`
-                        sendMediaURL(from, thumb, captions)
-                        await sendMediaURL(from, dl_link).catch(() => reply('❎ Ocurrió un error'))
-                        })                
-                        })
-                        } catch (err) {
-                        reply(mess.error.api)} 
-                   break
-
         
       //𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗠𝗔𝗞𝗘𝗥 
-									
 case 'stiker': 
 case 's': 
 case 'stikergif':
@@ -2243,115 +2439,85 @@ case 'sticker':
 case 'stickergif': 
 case 'sgif':  
   if (!isVerify) return reply(userB(prefix))
+  if (isBanned) return reply(banf()) 
+if (isMedia && !mek.message.videoMessage || isQuotedImage) {
+const encmedia1 = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+const dlfile1 = await Fg.downloadMediaMessage(encmedia1)
+
+const bas641 = `data:image/jpeg;base64,${dlfile1.toString('base64')}`
+
+anu = args.join(' ').split('|')
+satu = anu[0] !== '' ? anu[0] : `🔮 DyLux ┃ ᴮᴼᵀ `
+dua = typeof anu[1] !== 'undefined' ? anu[1] : `💎 @fg98._`
+
+var mantap1 = await convertSticker(bas641, `${dua}`, `${satu}`)
+var st = new Buffer.from(mantap1, 'base64');
+Fg.sendMessage(from, st, sticker, {contextInfo: {externalAdReply:{
+title:`${pushname}`,body:"",previewType:"PHOTO",thumbnail:fakelogo,sourceUrl:`https://chat.whatsapp.com/${soportefg}` }},quoted: mek})
+
+} else if ((isMedia && mek.message.videoMessage.fileLength < 10000000 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 10000000)) {
+const encmedia2 = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+const media2 = await Fg.downloadAndSaveMediaMessage(encmedia2, `./sticker/${sender}`)
+
+anu = args.join(' ').split('|')
+satu = anu[0] !== '' ? anu[0] : `DyLux`
+dua = typeof anu[1] !== 'undefined' ? anu[1] : `@fg98._`
+
+const Nombre2 = `${satu}`  //animados💎
+const author101 = `${dua}`
+exif.create(Nombre2, author101, `stickwm_${sender}`)
+reply(wait())
+await ffmpeg(`${media2}`)
+.inputFormat(media2.split('.')[4])
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`❎ Error : ${err}`)
+fs.unlinkSync(media2)
+tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+reply(`❎ Falló, en el momento de la conversión ${tipe} a la pegatina`)
+})
+.on('end', function () {
+console.log('✅ Listo')
+exec(`webpmux -set exif ./sticker/stickwm_${sender}.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
+if (error) return reply('error')
+sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), mek)
+fs.unlinkSync(media2)
+fs.unlinkSync(`./sticker/${sender}.webp`)
+fs.unlinkSync(`./sticker/stickwm_${sender}.exif`)
+})
+})
+.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decre
+ase,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+.toFormat('webp')
+.save(`./sticker/${sender}.webp`)
+} else {
+reply(`  *STICKER MAKER*\n▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n\n✳️ Envia una imagen con *${prefix + command}* Nombre|Autor \n o etiqueta una imagen que se haya enviado, *Videos 1-9 segundos*\n\n▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n*ALIAS DEL COMAMDO*\n\n${prefix}s\n${prefix}sticker\n${prefix}stickergif\n${prefix}sgif`)
+}
+break
+
+case 'take':
+         case 'takestick':
+         case 'robar':
+if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-					var a = 'FG98'
-        var b = 'DyLux v4'
-        if (
-          ((isMedia && !mek.message.videoMessage) || isQuotedImage) &&
-          args.length == 0
-        ) {
-          const encmedia = isQuotedImage
-            ? JSON.parse(JSON.stringify(mek).replace("quotedM", "m")).message
-                .extendedTextMessage.contextInfo
-            : mek;
-          media = await Fg.downloadAndSaveMediaMessage(encmedia);
-          await createExif(a, b);
-          out = getRandom(".webp");
-          ffmpeg(media)
-            .on("error", (e) => {
-              console.log(e);
-              Fg.sendMessage(from, "Ocurrió un error", "conversation", {
-                quoted: mek,
-              });
-              fs.unlinkSync(media);
-            })
-            .on("end", () => {
-              _out = getRandom(".webp");
-              spawn("webpmux", [
-                "-set",
-                "exif",
-                "./sticker/data.exif",
-                out,
-                "-o",
-                _out,
-              ]).on("exit", () => {
-                Fg.sendMessage(
-                  from,
-                  fs.readFileSync(_out),
-                  "stickerMessage",
-                  { quoted: mek }
-                );
-                fs.unlinkSync(out);
-                fs.unlinkSync(_out);
-                fs.unlinkSync(media);
-              });
-            })
-            .addOutputOptions([
-              `-vcodec`,
-              `libwebp`,
-              `-vf`,
-              `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`,
-            ])
-            .toFormat("webp")
-            .save(out);
-        } else if (
-          ((isMedia && mek.message.videoMessage.seconds < 11) ||
-            (isQuotedVideo &&
-              mek.message.extendedTextMessage.contextInfo.quotedMessage
-                .videoMessage.seconds < 11)) &&
-          args.length == 0
-        ) {
-          const encmedia = isQuotedVideo
-            ? JSON.parse(JSON.stringify(mek).replace("quotedM", "m")).message
-                .extendedTextMessage.contextInfo
-            : mek;
-          const media = await Fg.downloadAndSaveMediaMessage(encmedia);
-        var a = 'FG98'
-        var b = 'DyLux v4'
-          await createExif(a, b);
-          out = getRandom(".webp");
-          ffmpeg(media)
-            .on("error", (e) => {
-              console.log(e);
-              Fg.sendMessage(from, "Se produjo un error", "conversation", {
-                quoted: mek,
-              });
-              fs.unlinkSync(media);
-            })
-            .on("end", () => {
-              _out = getRandom(".webp");
-              spawn("webpmux", [
-                "-set",
-                "exif",
-                "./sticker/data.exif",
-                out,
-                "-o",
-                _out,
-              ]).on("exit", () => {
-                Fg.sendMessage(
-                  from,
-                  fs.readFileSync(_out),
-                  "stickerMessage",
-                  { quoted: mek }
-                );
-                fs.unlinkSync(out);
-                fs.unlinkSync(_out);
-                fs.unlinkSync(media);
-              });
-            })
-            .addOutputOptions([
-              `-vcodec`,
-              `libwebp`,
-              `-vf`,
-              `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`,
-            ])
-            .toFormat("webp")
-            .save(out);
-        } else {
-          reply(`✳️ Envia una imagen con *${prefix + command}* o etiqueta una imagen que se haya enviado\n*Videos 1-9 segundos*`)
-        }
-        break
+  if (!isQuotedSticker) return reply(`✳️ Responde a un sticker\n\n*USO DEL COMAMDO*\n*${prefix + command}* Nombre|Autor\n\n📌Ejemplo *${prefix + command}* Memes|FG98`);
+const encmediats = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+kls = args.join(" ").split("|");
+pack = kls[0] !== "" ? kls[0] : `🔮 DyLux ┃ ᴮᴼᵀ`;
+author2 = typeof kls[1] !== "undefined" ? kls[1] : `💎 @fg98._`;
+
+const dlfile = await Fg.downloadMediaMessage(encmediats)
+
+const bas64 = `data:image/jpeg;base64,${dlfile.toString('base64')}`
+var mantap = await convertSticker(bas64, `${author2}`, `${pack}`)
+var imageBuffer = new Buffer.from(mantap, 'base64');
+
+Fg.sendMessage(from, imageBuffer, sticker, {quoted: mek})
+break
         
+
       case 'toimage': 
 case 'toimg':
 case 'aimg':
@@ -2367,10 +2533,13 @@ if (!isQuotedSticker) return reply(`STICKER a IMAGEN\n▁▁▁▁▁▁▁▁�
 						fs.unlinkSync(media)
 						if (err) return reply(' ❎ Error al convertir Sticker a imagen ')
 						buffer = fs.readFileSync(ran)
-						Fg.sendMessage(from, buffer, image, {quoted: mek, caption: '✅ Aqui tienes'})
+						Fg.sendMessage(from, buffer, image, {thumbnail: fakefg, quoted: mek, caption: '✅ Aqui tienes'})
 						fs.unlinkSync(ran)
 					})
 break
+
+      
+      
 
       case 'emoji':
                    case 'semoji':
@@ -2391,20 +2560,17 @@ console.log('  ✅ emoji a sticker ' )
             })
 break
 
-     
-       
-     
-
+      
 case 'join':
 case 'entrabot':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo \n\n📌 Ejemplo *${prefix + command}* ${soportefg}`);
- try {
+  if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo\n\n📌 Ejemplo *${prefix + command}* ${soportefg}`); 
+        try {
           if (!isUrl(args[0]) && !args[0].includes("whatsapp.com"))
             return reply(mess.link);
           hen = args[0];
-          
+
           var codeInvite = hen.split("https://chat.whatsapp.com/")[1];
           if (!codeInvite) return reply("Asegúrese de que el enlace sea correcto");
           var response = await Fg.acceptInvite(codeInvite);
@@ -2412,16 +2578,16 @@ if (!isVerify) return reply(userB(prefix))
         } catch {
           reply("❎ Link invalido!");
         }
-       
-        break;
+         break;
 
-      case 'runtime':    
+       case 'runtime':    
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf()) 
 					runtime = process.uptime()
 					runte = `「 *TIEMPO DE EJECUCION* 」\n\n*${kyun(runtime)}*`
 					reply(`${runte}`)
 					break
+					
       case 'speed':
 case 'ping': 
 if (!isVerify) return reply(userB(prefix))
@@ -2437,7 +2603,7 @@ case 'toav':
 case 'toaudio':
 if (!isVerify) return reply(userB(prefix))
                    if (isBanned) return reply(banf())
-               if (!isQuotedAudio && !isQuotedVideo) return reply(`✳️ Responde a un audio o vídeo`)
+                   if (!isQuotedAudio && !isQuotedVideo) return reply(`✳️ Responde a un audio o vídeo`)
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await Fg.downloadAndSaveMediaMessage(encmedia)
 hah = fs.readFileSync(media)
@@ -2465,9 +2631,9 @@ fs.unlinkSync(ran)
 break
       case 'tovid':
 case 'tomp4':
-case 'amp4': 
+case 'amp4':
+case 'mp4': 
 case 'tovideo':
-case 'mp4':
 if (!isVerify) return reply(userB(prefix))
                    if (isBanned) return reply(banf())
 if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
@@ -2482,7 +2648,7 @@ if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 
             reply('✳️ Responde a un sticker animado')
             }
             fs.unlinkSync(owgi)
-break
+ break
 						 
 case 'togif':
 case 'agif':
@@ -2499,8 +2665,7 @@ console.log(memek)
 anu = await getBuffer(memek.result)
 Fg.sendMessage(from, anu, video, {mimetype: 'video/gif', caption: '✅ Aquí tienes', quoted: mek})
 break
-      
-case 'tourl':
+      case 'tourl':
 case 'aurl':
 if (!isVerify) return reply(userB(prefix))
                    if (isBanned) return reply(banf())
@@ -2517,7 +2682,7 @@ if (!isVerify) return reply(userB(prefix))
             
 //-----------------------------ATTP - TTP----------------------------
 
-case 'ttp':  
+						case 'ttp':  
              if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 if (args.length < 1) return reply(`✳️ _Envie el texto_\n\n📌Ejemplo *${prefix + command}* DyLux`)
@@ -2525,7 +2690,6 @@ if (args.length < 1) return reply(`✳️ _Envie el texto_\n\n📌Ejemplo *${pre
                     F = q
                     anu1 = await getBuffer(`https://lolhuman.herokuapp.com/api/ttp3?apikey=${lolkey}&text=${F}`)
                     Fg.sendMessage(from, anu1, sticker, {quoted: mek})
-                    
                     break
                     
 
@@ -2537,11 +2701,10 @@ if (args.length < 1) return reply(`✳️ _Envie el texto_\n\n📌Ejemplo *${pre
 					var teks = encodeURIComponent(args.join(' '))
 					const attp = await getBuffer(`https://api.xteam.xyz/attp?file&text=${teks}`)
 					Fg.sendMessage(from, attp, sticker, {quoted: mek})
-					  
-break
+					  break
 					
 					
-//----ENCODE Y DECODE---FG98
+//----ENCODE Y DECODE--
 case 'code':
 case 'encode':
 if (!isVerify) return reply(userB(prefix))
@@ -2567,42 +2730,25 @@ break
 
 
 
-//--------------------------------------
       default:
  
                  if (budy.includes(`Gracias bot`)) {
-                  reply(`De nada 😊 estoy para ayudarte`)
+                  replyfg(`De nada 😊 estoy para ayudarte`)
                   }
 				
-//------------------------------------------------------------------------
-        if (isOwner && body.startsWith(">")) {
-          try {
-            return Fg.sendMessage(
-              from,
-              JSON.stringify(eval(budy.slice(2)), null, "\t"),
-              text,
-              { quoted: mek }
-            );
-          } catch (err) {
-            e = String(err);
-            reply(e);
-          }
+}
+if (isGroup && budy != undefined) {
+	} else {
+	console.log(color('[FG98]', 'red'), 'Chat PRIVADO', color(sender.split('@')[0]))
+	}		
+} catch (e) {
+     e = String(e) 
+    if (!e.includes("this.isZero")) {
+	console.log('Message : %s', color(e, 'red'))
         }
-    }
-  
-    if (isGroup && budy != undefined) {
-    } else {
-      console.log(
-        color("[CHAT]", "red"),
-        "PRIVADO",
-        color(sender.split("@")[0])
-      );
-    }
-  } catch (e) {
-    e = String(e);
-    if (!e.includes("this.isZero") && !e.includes("jid")) {
-      console.log("Message : %s", color(e, "green"));
-    }
-    // console.log(e)
-  }
-};
+	 //console.log(e)
+	}
+}
+
+
+        
