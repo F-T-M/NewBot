@@ -70,7 +70,6 @@ const _prem = require("./libreria/premium");
 const game = require("./libreria/game");
 const Exif = require('./libreria/exif');
 const exif = new Exif();
-const { pinterest } = require('./libreria/pinterest')
 
 //-- Reportes
 const _informe = JSON.parse(fs.readFileSync('./result/reportes/informe.json'));
