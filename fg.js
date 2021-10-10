@@ -29,7 +29,6 @@ const yo = require("tod-api");
 const dh = require("dhn-api");
 const simple = require('./libreria/simple.js')
 const hx = require('hxz-api')
-const translate = require("@vitalets/google-translate-api");
 const qrcode = require("qrcode-terminal")
 const moment = require("moment-timezone")
 const speed = require('performance-now')
