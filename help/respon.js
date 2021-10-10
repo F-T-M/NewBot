@@ -33,7 +33,13 @@ const ownerB = () => {
 const modsB = () => {
   return `❎ Este comando es solo para el *Dueño y Moderadores del Bot*`
 }
-
+//--
+const leveloff = () => {
+  return '❎ La nivelación no está habilitado en el grupo'
+}
+const lvlnul = () => {
+  return '❎ Tu nivel aun está vacio'
+}
 
 //--
 const userB = (prefix) => {
@@ -51,4 +57,4 @@ const Badmin = () => {
 }
 
 
-module.exports =  { wait, stick, errorfg, group, banf, ownerB, userB, modsB, admin, Badmin } 
+module.exports =  { wait, stick, errorfg, group, banf, ownerB, userB, modsB, admin, Badmin, leveloff, lvlnul} 
