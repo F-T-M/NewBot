@@ -2446,8 +2446,7 @@ dua = typeof anu[1] !== 'undefined' ? anu[1] : `💎 @fg98._`
 
 var mantap1 = await convertSticker(bas641, `${dua}`, `${satu}`)
 var st = new Buffer.from(mantap1, 'base64');
-Fg.sendMessage(from, st, sticker, {contextInfo: {externalAdReply:{
-title:`${pushname}`,body:"",previewType:"PHOTO",thumbnail:fakelogo,sourceUrl:`https://chat.whatsapp.com/${soportefg}` }},quoted: mek})
+Fg.sendMessage(from, st, sticker, {quoted: mek})
 
 } else if ((isMedia && mek.message.videoMessage.fileLength < 10000000 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 10000000)) {
 const encmedia2 = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
