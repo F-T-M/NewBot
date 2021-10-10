@@ -478,7 +478,6 @@ Fg.sendMessage(from, teks, text, {quoted:mek,thumbnail : fakefg})
 ▢ *Xp* : ${getLevelingXp(sender)}
 ▢ *Nivel* : ${getLevel} ➪ ${getLevelingLevel(sender)}
 ▢ *Rango* : *${role}*
-▢ *Diamantes* : *+2💎*
 └──────────────`)
 					}
 				} catch (err) {
@@ -607,14 +606,14 @@ let Leveling_ = 'Inactivo'
 
 
 
-//------------ 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗠𝗔𝗞𝗘𝗥 2 FG98---------
+//------------ 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗠𝗔𝗞𝗘𝗥 FG98---------
 const sendSticker = (from, filename, mek) => {
         Fg.sendMessage(from, filename, MessageType.sticker, {quoted: mek})
 }
 
 //------------ 𝗕𝗔𝗡𝗖𝗛𝗔𝗧 ----------
 if (isBanchat){
-if (!isOwner)return //reply(`Grupo Silenciado`) 
+if (!isOwner && !isMods)return //reply(`Grupo Silenciado`) 
 }
 
 //---- 𝗕𝗢𝗧 𝗠𝗢𝗗𝗢 𝗣𝗥𝗜𝗩𝗔𝗗𝗢--
@@ -739,7 +738,6 @@ if (!isVerify) return reply(userB(prefix))
  ▢  *${prefix}nivel*  para ver tu nivel 
  ▢  *${prefix}leveling*  para activar la nivelación en el grupo
 `
-
   reply(cbios)
 break
    
