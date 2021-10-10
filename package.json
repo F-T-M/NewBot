@@ -67,7 +67,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adulalhy/SZ-SELF.git"
+    "url": "git+https://github.com/FG98F/fgbotv4.git"
   },
   "keywords": [
     "Wasu"
@@ -75,7 +75,7 @@
   "author": "FG98",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/adulalhy/SZ-SELF/issues"
+    "url": "https://github.com/FG98F/fgbotv4/issues"
   },
-  "homepage": "https://github.com/adulalhy"
+  "homepage": "https://github.com/FG98F"
 }
