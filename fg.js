@@ -62,7 +62,6 @@ const { color, bgcolor } = require('./libreria/color')
 const { fetchJson, getBase64, kyun, createExif } = require('./libreria/fetcher')
 const { yta, ytv, igdl, upload, formatDate } = require("./libreria/ytdl");
 const { webp2mp4File } = require("./libreria/webp2mp4");
-const { cmdadd } = require("./libreria/totalcmd.js");
 const Exif = require('./libreria/exif');
 const exif = new Exif();
 
@@ -80,6 +79,7 @@ const _user = JSON.parse(fs.readFileSync('./database/verify.json'))
 const _leveling = JSON.parse(fs.readFileSync('./database/leveling.json'))
 const _level = JSON.parse(fs.readFileSync('./database/nivel.json'))
 const awgp = JSON.parse(fs.readFileSync('./database/awgp.json'))
+const totalhit = JSON.parse(fs.readFileSync('./libreria/totalcmd.json'))
 
 //-- Resultados
 const _verdad = JSON.parse(fs.readFileSync('./result/verdad.json'));
@@ -337,9 +337,6 @@ const pushname = mek.key.fromMe ? Fg.user.name : conts.notify || conts.vname || 
 const isBanned = ban.includes(sender)
 const isLevelingOn = isGroup ? _leveling.includes(from) : false
 const isAw = isGroup ? awgp.includes(from) : false
-
-const totalhit = JSON.parse(fs.readFileSync("./libreria/totalcmd.json"))[0]
-      .totalcmd;
 
    chats = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
     const arg = chats.slice(command.length + 2, chats.length)
@@ -604,6 +601,13 @@ let Leveling_ = 'Inactivo'
 			Leveling_ = 'Activo'
 			}
 
+//--- Total comandos 
+const cmdadd = () => {
+	totalhit[0].totalcmd += 1
+	fs.writeFileSync('./libreria/totalcmd.json', JSON.stringify(totalhit))
+}
+  if (isCmd) cmdadd()
+  const reqcmd = JSON.parse(fs.readFileSync('./libreria/totalcmd.json'))[0].totalcmd
 
 
 //------------ 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗠𝗔𝗞𝗘𝗥 FG98---------
@@ -643,7 +647,7 @@ case "menu":
       if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
 	uptime = process.uptime()
-  capt = `Total Hits : ${totalhit} \n‣ Clasificacion : ★★★★☆\n‣ Usuarios : ${_user.length}`
+  capt = `Total Hits : ${reqcmd} \n‣ Clasificacion : ★★★★☆\n‣ Usuarios : ${_user.length}`
   thum = await fs.readFileSync('./image/fg.jpg').toString('base64')
       replyimg(help(prefix, pushname), text, capt, thum)
 break;
@@ -662,7 +666,7 @@ infobot =`⊷ *BOT*
 ▢ Nombre : *${Fg.user.name}*
 ▢ Version Bot : *4.0.0*
 ▢ Prefijo : *${single ? `${prefa}` : multi ? 'Multiprefijo' : 'SinPrefijo'}*
-▢ Total Hits : *${totalhit}*
+▢ Total Hits : *${reqcmd}*
 ▢ Usuarios registrados : ${_user.length}
 ▢ Navegador : *${Fg.browserDescription[1]}*
 ▢ Versión Navegador: *${Fg.browserDescription[2]}*
@@ -2671,8 +2675,7 @@ if (args.length < 1) return reply(`✳️ _Envie el texto_\n\n📌Ejemplo *${pre
 					const attp = await getBuffer(`https://api.xteam.xyz/attp?file&text=${teks}`)
 					Fg.sendMessage(from, attp, sticker, {quoted: mek})
 					  break
-					
-					
+				
 //----ENCODE Y DECODE--
 case 'code':
 case 'encode':
