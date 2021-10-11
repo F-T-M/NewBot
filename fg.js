@@ -1398,8 +1398,7 @@ case 'shipping':
     if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf()) 
     if (!isGroup) return reply(group())
-    if (isGame(sender, isOwner, gcount, glimit)) return reply(gCoinF(prefix))
-					jds = []
+    jds = []
 					jdii = groupMembers
 					koss = groupMembers
 					akuu = jdii[Math.floor(Math.random() * jdii.length)]
@@ -1414,7 +1413,6 @@ case 'shipping':
 					jds.push(akuu.jid)
 					jds.push(diaa.jid)
 					mentions(teks, jds, true)
-					gameAdd(sender, glimit)
 					break	
 					
 					case 'random':
