@@ -1216,8 +1216,7 @@ Argentina : *${argt}*
 				case 'tinyurl':
 				 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-				if (args.length < 1) return reply(`✳️ Ingrese el link para acortar`)
+if (args.length < 1) return reply(`✳️ Ingrese el link para acortar`)
 try {
 link = args[0]
 anu = await axios.get(`https://tinyurl.com/api-create.php?url=${link}`)
@@ -1226,7 +1225,6 @@ reply(`${anu.data}`)
 emror = String(e)
 reply(`${e}`)
 }
-limitAdd(sender, limit)
 break
 
 
@@ -1446,9 +1444,7 @@ break
 					case 'motivada':
 					 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-  
-					var imgbb = require('imgbb-uploader')
+var imgbb = require('imgbb-uploader')
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 					ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 					reply(wait())
@@ -1466,7 +1462,6 @@ break
 					console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('📤 Enviando sticker...'))
 					fs.unlinkSync(rano)
 					})
-					limitAdd(sender, limit)
 					} else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1475,8 +1470,7 @@ break
 		case  'gay2':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-					if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
+if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
 gay = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek;
 reply(wait())
 owgig = await Fg.downloadMediaMessage(gay)
@@ -1490,7 +1484,6 @@ var mantap2 = await convertSticker(bas642, `💎 @fg98._`, `🔮 DyLux ┃ ᴮ�
 var imageBuffer2 = new Buffer.from(mantap2, 'base64');
 Fg.sendMessage(from, imageBuffer2, sticker, {quoted: mek})
 fs.unlinkSync('./stickgay.jpeg')
-limitAdd(sender, limit)
 } else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1500,8 +1493,7 @@ limitAdd(sender, limit)
 					case 'sf':
 					if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-            if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
+   if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
 rip = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek;
 reply(wait())
 owgir = await Fg.downloadMediaMessage(rip)
@@ -1515,7 +1507,6 @@ var mantap2r = await convertSticker(bas642r, `💎 @fg98._`, `🔮 DyLux ┃ ᴮ
 var imageBuffer2r = new Buffer.from(mantap2r, 'base64');
 Fg.sendMessage(from, imageBuffer2r, sticker, {quoted: mek})
 fs.unlinkSync('./stickrip.jpeg')
-limitAdd(sender, limit)
 } else {
 reply('✳️ *Envia una imagen con el comando o etiqueta una imagen que se haya enviado*')
 }
@@ -1525,8 +1516,7 @@ break
 		case  'aprobado':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-					var imgbb = require('imgbb-uploader')
+  var imgbb = require('imgbb-uploader')
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 					ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 					reply(wait())
@@ -1544,7 +1534,6 @@ break
 					console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('📤 Enviando sticker...'))
 					fs.unlinkSync(rano)
 					})
-					limitAdd(sender, limit)
 					} else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1557,8 +1546,7 @@ break
 		case 'scarcel':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-					if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
+if (((isMedia && !mek.message.videoMessage) || isQuotedImage) && args.length == 0) {
 rej = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek;
 reply(wait())
 owgir = await Fg.downloadMediaMessage(rej)
@@ -1572,7 +1560,6 @@ var mantap2c = await convertSticker(bas642c, `💎 @fg98._`, `🔮 DyLux ┃ ᴮ
 var imageBuffer2c = new Buffer.from(mantap2c, 'base64');
 Fg.sendMessage(from, imageBuffer2c, sticker, {quoted: mek})
 fs.unlinkSync('./stickc.jpeg')
-limitAdd(sender, limit)
 } else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1583,8 +1570,7 @@ limitAdd(sender, limit)
 		case  'desperdiciada':
 		if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-					var imgbb = require('imgbb-uploader')
+var imgbb = require('imgbb-uploader')
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 					ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 					reply(wait())
@@ -1602,7 +1588,6 @@ limitAdd(sender, limit)
 					console.log(color(time, 'magenta'), color(moment.tz('America/La_Paz').format('HH:mm:ss'), "gold"), color('📤 Enviando sticker...'))
 					fs.unlinkSync(rano)
 					})
-					limitAdd(sender, limit)
 					} else {
 					reply('✳️ Envia o responde a una imagen')
 					}
@@ -1611,7 +1596,6 @@ limitAdd(sender, limit)
 case 'smeme':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
 if (!isQuotedSticker) return reply(`✳️Responde a un sticker con el comando\n📌Ejemplo ${prefix + command} text|text2`)
 smeme = q
 var tex1 = smeme.split('|')[0]
@@ -1628,13 +1612,11 @@ teks = `${anu.display_url}`
 sendStickerUrl(from, `https://pecundang.herokuapp.com/api/memegen2?teks1=${tex1}&teks2=${tex2}&img_url=${teks}`, mek)
 fs.unlinkSync('./stickmeme.jpeg')
 }
-limitAdd(sender, limit)
 break
 case 'stickmeme2':		
 case 'smeme2':	
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())						
-if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
 if(!q) return reply(`✳️Responde a un sticker con el comando\n📌Ejemplo ${prefix + command} jsjs`)
 if (mek.message.extendedTextMessage != undefined || mek.message.extendedTextMessage != null) {
 ger = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -1647,7 +1629,6 @@ teks = `${anu.display_url}`
 sendStickerUrl(from, `https://pecundang.herokuapp.com/api/memegen3?teks=${q}&img_url=${teks}`, mek)
 fs.unlinkSync('./stickmeme.jpeg')
 }
-limitAdd(sender, limit)
 break
         
 
@@ -2040,15 +2021,13 @@ break
    case 'img':
         if (!isVerify) return reply(userB(prefix))
         if (isBanned) return reply(banf())
-        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(fdiama(prefix))
-        if (!q) return reply(`❎ Que imagen quieres que busque?`);
+       if (!q) return reply(`❎ Que imagen quieres que busque?`);
         reply(wait())
         let pin = await hx.pinterest(q);
         let ac = pin[Math.floor(Math.random() * pin.length)];
         let di = await getBuffer(ac);
         await Fg.sendMessage(from, di, image, { quoted: mek, caption: `✅ Aqui tienes : *${q}*` });
-        limitAdd(sender, limit)
-        break;
+           break;
        
        
         
