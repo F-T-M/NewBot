@@ -788,10 +788,8 @@ case 'simi':
 case 'bot':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
-		 if (args.length < 1) return reply(`Hola _*${pushname}*_ quieres charlar un rato?\n\nResponde con *${prefix + command}* _tu mensaje_`)
-		texto = args.join(' ')
-                     anu = await fetchJson(`https://api.simsimi.net/v2/?text=${texto}&lc=es`)
-                     simfg = (`${anu.success}`)      
+		 var _0x5273f5=_0xf370;(function(_0x1e3c36,_0x2391b8){var _0x5da6fa=_0xf370,_0x1a4f42=_0x1e3c36();while(!![]){try{var _0x23cbdb=parseInt(_0x5da6fa(0x7a))/0x1*(-parseInt(_0x5da6fa(0x76))/0x2)+parseInt(_0x5da6fa(0x75))/0x3*(-parseInt(_0x5da6fa(0x7f))/0x4)+parseInt(_0x5da6fa(0x7c))/0x5+-parseInt(_0x5da6fa(0x7d))/0x6+parseInt(_0x5da6fa(0x81))/0x7*(-parseInt(_0x5da6fa(0x73))/0x8)+-parseInt(_0x5da6fa(0x7e))/0x9*(-parseInt(_0x5da6fa(0x79))/0xa)+parseInt(_0x5da6fa(0x77))/0xb;if(_0x23cbdb===_0x2391b8)break;else _0x1a4f42['push'](_0x1a4f42['shift']());}catch(_0x2636c6){_0x1a4f42['push'](_0x1a4f42['shift']());}}}(_0x5840,0x35af4));if(args[_0x5273f5(0x74)]<0x1)return reply(_0x5273f5(0x83)+pushname+_0x5273f5(0x80)+(prefix+command)+_0x5273f5(0x78));function _0x5840(){var _0xd47081=['1213302FVfrhC','496917QweCaM','362992jbvwzj','*_\x20quieres\x20charlar\x20un\x20rato?\x0a\x0aResponde\x20con\x20*','1384439ZPZFKX','join','Hola\x20_*','8HpRKqB','length','6AOqIvn','1636bvVBXF','8431742cGYzLz','*\x20_tu\x20mensaje_','20ZLlBtg','497YxvNGG','&lc=es','1654900PbnCcs'];_0x5840=function(){return _0xd47081;};return _0x5840();}function _0xf370(_0x412529,_0x3a723e){var _0x58400a=_0x5840();return _0xf370=function(_0xf370c6,_0x112276){_0xf370c6=_0xf370c6-0x73;var _0x4627a9=_0x58400a[_0xf370c6];return _0x4627a9;},_0xf370(_0x412529,_0x3a723e);}texto=args[_0x5273f5(0x82)]('\x20'),anu=await fetchJson('https://api.simsimi.net/v2/?text='+texto+_0x5273f5(0x7b));
+	     simfg = (`${anu.success}`)      
                      replyfg(simfg)
                      break
                    
