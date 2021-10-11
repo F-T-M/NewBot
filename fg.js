@@ -2369,9 +2369,12 @@ case 'profile':
 					} catch {
 					ppimg = 'https://i.ibb.co/PZNv21q/Profile-FG98.jpg'
 					}
+					const lvl = getLevelingLevel(sender)
+					
 					 profile = `┌────「 *PERFIL* 」
 ▢ *🔖 Nombre:* ${pushname}
 ▢ *🔗 Link:* wa.me/${sender.split("@")[0]}
+▢ *🆙 Nivel* : ${lvl}
 └──────────────`
 					buffer = await getBuffer(ppimg)
 					Fg.sendMessage(from, buffer, image, {quoted: mek, caption: profile})
