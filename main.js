@@ -70,7 +70,7 @@ Fg.on('group-participants-update', async (anu) => {
 
 ▢ *Pide las reglas del grupo* para evitar ser baneado
 
-/*▢ *📌 Descripción :* \n${mdata.desc}*/
+▢ *📌 Descripción :* \n${mdata.desc}
 `
 				
 				let buff = await getBuffer(ppimg)
