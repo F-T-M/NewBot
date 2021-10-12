@@ -2538,6 +2538,7 @@ case 'join':
 case 'entrabot':
 if (!isVerify) return reply(userB(prefix))
   if (isBanned) return reply(banf())
+  if (isGroup) return reply(`✳️ Sólo disponible en el privado del bot`)
   if (args.length < 1) return reply(`✳️ Envie el link de tu Grupo\n\n📌 Ejemplo *${prefix + command}* ${soportefg}`); 
         try {
           if (!isUrl(args[0]) && !args[0].includes("whatsapp.com"))
