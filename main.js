@@ -26,7 +26,7 @@ const starts = async (Fg = new WAConnection()) => {
     //console.log(banner.string)
     
     Fg.on('qr', () => {
-        console.log(color('[','white'), color('!','red'), color(']','white'), color(' SCAN QR TO FgECT'))
+        console.log(color('[','white'), color('!','red'), color(']','white'), color(' Escanee el codigo QR para conectarse...'))
     })
 
 const CFonts  = require('cfonts')
