@@ -30,7 +30,7 @@ const starts = async (Fg = new WAConnection()) => {
     })
 
 const CFonts  = require('cfonts')
-CFonts.say(' ', {
+CFonts.say('', {
   font: 'pallet',
   align: 'center',
   gradient: ['red', 'magenta']
