@@ -1,1 +1,1 @@
-Esperovte guste mi bot 😇🍓
+Espero te guste mi bot 😇🍓
